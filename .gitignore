@@ -1,0 +1,33 @@
+# Local and private material
+.Codex/
+local-*/
+private/
+publish/
+.publish/
+
+# Build and test output
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+work/backups/
+work/edge-*/
+work/edge-*
+work/doc-*/
+work/doc-qa*/
+work/visual-options/
+work/agent-audits/
+work/release-history/
+work/standalone-check/
+work/**/*.before-*
+work/**/*before-*
+work/*.log
+work/*.csv
+work/*-audit.json
+
+# OS and editor files
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

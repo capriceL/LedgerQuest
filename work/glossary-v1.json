@@ -1,0 +1,1862 @@
+{
+  "version": "1.1",
+  "description": "LedgerQuest 三科英文术语与中文解释。用于正文自动标注、知识库搜索和点击解释。具体准则、法条口径仍需按 2026 教材复核。",
+  "terms": [
+    {
+      "id": "gross-carrying-amount",
+      "term": "Gross Carrying Amount",
+      "full": "Gross Carrying Amount",
+      "zh": "账面余额",
+      "aliases": [
+        "账面余额"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "科目账上还没扣折旧、摊销和减值准备的原数。它回答“原来记了多少”，不是现在真正值多少。",
+      "example": "固定资产原价 100 万元，累计折旧 30 万元，减值准备 5 万元；账面余额仍是 100 万元。"
+    },
+    {
+      "id": "carrying-amount",
+      "term": "Carrying Amount",
+      "full": "Carrying Amount",
+      "zh": "账面价值",
+      "aliases": [
+        "账面价值"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "账面余额扣掉备抵项目后的金额：固定资产扣累计折旧和减值；无形资产扣累计摊销和减值；存货通常扣跌价准备。",
+      "example": "原价 100 万元，累计折旧 30 万元，减值准备 5 万元，账面价值 = 100 - 30 - 5 = 65 万元。"
+    },
+    {
+      "id": "net-book-value",
+      "term": "Net Book Value",
+      "full": "Net Book Value (NBV)",
+      "zh": "账面净值",
+      "aliases": [
+        "账面净值",
+        "NBV"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "固定资产通常指原价减累计折旧后的金额，不减减值准备。考试里要和“账面价值”分开看。",
+      "example": "原价 100 万元，累计折旧 30 万元，减值 5 万元；账面净值 = 100 - 30 = 70 万元，账面价值 = 65 万元。"
+    },
+    {
+      "id": "fair-value",
+      "term": "Fair Value",
+      "full": "Fair Value (FV)",
+      "zh": "公允价值",
+      "aliases": [
+        "公允价值",
+        "FV"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "市场参与者在计量日有序交易中愿意成交的价格。关键词是“市场参与者、有序交易、计量日”。",
+      "example": "同一天同一市场，买方愿出 98 万元、卖方要 102 万元，不能随便取一个数，要看可观察市场证据。"
+    },
+    {
+      "id": "present-value",
+      "term": "Present Value",
+      "full": "Present Value (PV)",
+      "zh": "现值",
+      "aliases": [
+        "现值",
+        "PV"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "把未来一笔钱按合适折现率折回今天，看看今天值多少。不同时点的钱不能直接相加。",
+      "example": "一年后 105 万元，按 5% 折现，现值 = 105 ÷ 1.05 = 100 万元。"
+    },
+    {
+      "id": "profit-or-loss",
+      "term": "Profit or Loss",
+      "full": "Profit or Loss for the Period",
+      "zh": "当期损益",
+      "aliases": [
+        "当期损益",
+        "损益"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "会影响本期利润表结果的收入、费用、利得和损失。判断时别只看现金有没有收到，要看会计上有没有确认进利润表。",
+      "example": "存货跌价准备通常计入资产减值损失，影响当期损益；其他综合收益通常不进当期损益。"
+    },
+    {
+      "id": "oci",
+      "term": "OCI",
+      "full": "Other Comprehensive Income",
+      "zh": "其他综合收益",
+      "aliases": [
+        "其他综合收益"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "利润表之外、先放在所有者权益里的那部分综合收益。它不直接等于当期净利润，但会影响所有者权益。",
+      "example": "指定为以公允价值计量且其变动计入其他综合收益的权益工具，其公允价值变动通常进 OCI，而不是直接进净利润。"
+    },
+    {
+      "id": "operating-profit",
+      "term": "Operating Profit",
+      "full": "Operating Profit",
+      "zh": "营业利润",
+      "aliases": [
+        "营业利润"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业日常经营活动形成的利润，通常从营业收入出发，扣营业成本、税金及附加、期间费用、减值等，再加投资收益等项目。",
+      "example": "营业收入 500 万元，营业成本 300 万元，期间费用 80 万元，没有其他项目，营业利润通常是 120 万元。"
+    },
+    {
+      "id": "profit-before-tax",
+      "term": "Profit Before Tax",
+      "full": "Profit Before Tax (PBT)",
+      "zh": "利润总额",
+      "aliases": [
+        "利润总额",
+        "PBT"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "还没扣所得税费用的利润。通常是在营业利润基础上加减营业外收支等。",
+      "example": "营业利润 120 万元，营业外收入 10 万元，营业外支出 5 万元，利润总额 = 125 万元。"
+    },
+    {
+      "id": "net-profit",
+      "term": "Net Profit",
+      "full": "Net Profit / Net Income",
+      "zh": "净利润",
+      "aliases": [
+        "净利润",
+        "净利"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "利润总额扣掉所得税费用后的最终利润。它属于利润表结果，不等于经营现金流。",
+      "example": "利润总额 125 万元，所得税费用 25 万元，净利润 = 100 万元。"
+    },
+    {
+      "id": "asset-impairment-loss",
+      "term": "Asset Impairment Loss",
+      "full": "Asset Impairment Loss",
+      "zh": "资产减值损失",
+      "aliases": [
+        "资产减值损失"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "资产账面价值高于可收回金额时确认的损失。不是资产一跌价就确认，要先算可收回金额。",
+      "example": "设备账面价值 80 万元，可收回金额 65 万元，通常确认 15 万元资产减值损失。"
+    },
+    {
+      "id": "credit-impairment-loss",
+      "term": "Credit Impairment Loss",
+      "full": "Credit Impairment Loss",
+      "zh": "信用减值损失",
+      "aliases": [
+        "信用减值损失"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "金融资产按预期信用损失模型计提减值时使用的损失科目。关键词是“预期信用损失、坏账、准备”。",
+      "example": "应收账款预计收不回来一部分，按预期信用损失确认信用减值损失，而不是等到实际赖账才处理。"
+    },
+    {
+      "id": "nrv",
+      "term": "NRV",
+      "full": "Net Realizable Value",
+      "zh": "可变现净值",
+      "aliases": [
+        "可变现净值"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "存货在正常经营中预计售价，减掉还要发生的加工费、销售费用和相关税费后的金额。不是直接把售价当 NRV。",
+      "example": "预计售价 100 万元，完工还需投入 10 万元，销售税费 5 万元，NRV = 100 - 10 - 5 = 85 万元。"
+    },
+    {
+      "id": "recoverable-amount",
+      "term": "Recoverable Amount",
+      "full": "Recoverable Amount",
+      "zh": "可收回金额",
+      "aliases": [
+        "可收回金额"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "资产未来能给企业带回来的价值，通常取“公允价值减处置费用”和“预计未来现金流量现值”两者较高者。",
+      "example": "公允价值减处置费用 70 万元，使用价值 75 万元，可收回金额取 75 万元。"
+    },
+    {
+      "id": "fair-value-less-cost-of-disposal",
+      "term": "Fair Value Less Costs of Disposal",
+      "full": "Fair Value Less Costs of Disposal",
+      "zh": "公允价值减去处置费用",
+      "aliases": [
+        "公允价值减处置费用",
+        "公允价值减去处置费用"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "假设现在卖掉资产，能拿到的公允价值再扣掉直接处置费用。别把资产继续使用产生的现金流混进来。",
+      "example": "公允价值 80 万元，处置费用 5 万元，净额就是 75 万元。"
+    },
+    {
+      "id": "value-in-use",
+      "term": "Value in Use",
+      "full": "Value in Use",
+      "zh": "使用价值",
+      "aliases": [
+        "使用价值",
+        "预计未来现金流量现值"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "资产继续使用、最终处置预计带来的未来现金流量，按合适折现率折成的现值。",
+      "example": "设备未来三年预计每年带来 30 万元净现金流，按给定折现率折现后的合计，就是使用价值。"
+    },
+    {
+      "id": "goodwill",
+      "term": "Goodwill",
+      "full": "Goodwill",
+      "zh": "商誉",
+      "aliases": [
+        "商誉"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "非同一控制下企业合并中，合并成本超过取得可辨认净资产公允价值份额的部分。不是所有并购都会产生新商誉。",
+      "example": "合并成本 1000 万元，取得可辨认净资产公允价值份额 850 万元，差额 150 万元通常形成商誉。"
+    },
+    {
+      "id": "cgu",
+      "term": "CGU",
+      "full": "Cash-Generating Unit",
+      "zh": "资产组",
+      "aliases": [
+        "资产组",
+        "现金产出单元"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "若干资产组合在一起，能独立产生现金流入的最小资产组合。单项资产无法单独测试减值时才用它。",
+      "example": "一条生产线上的机器、传送带和配套软件共同产出产品，可能组成一个资产组。"
+    },
+    {
+      "id": "nci",
+      "term": "NCI",
+      "full": "Non-controlling Interest",
+      "zh": "少数股东权益",
+      "aliases": [
+        "少数股东权益",
+        "少数股东"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "合并报表中不属于母公司的那部分子公司净资产权益。母公司持股不足 100% 时会出现。",
+      "example": "母公司持有子公司 80%，合并报表中另外 20% 对应的权益通常列作少数股东权益。"
+    },
+    {
+      "id": "ppe",
+      "term": "PPE",
+      "full": "Property, Plant and Equipment",
+      "zh": "固定资产",
+      "aliases": [
+        "固定资产",
+        "不动产、厂房和设备"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "企业为生产商品、提供劳务、出租或经营管理而持有，使用寿命超过一个会计年度的有形资产。",
+      "example": "生产设备、厂房、运输车辆通常属于 PPE；房地产开发企业准备出售的商品房通常属于存货。"
+    },
+    {
+      "id": "rou-asset",
+      "term": "ROU Asset",
+      "full": "Right-of-Use Asset",
+      "zh": "使用权资产",
+      "aliases": [
+        "使用权资产",
+        "ROU"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "承租人在租赁期内使用租赁资产的权利。正式会计里把它当作一项资产，同时确认租赁负债。",
+      "example": "公司租入一栋办公楼用于经营，租期和金额达到准则条件时，通常确认使用权资产和租赁负债。"
+    },
+    {
+      "id": "lease-liability",
+      "term": "Lease Liability",
+      "full": "Lease Liability",
+      "zh": "租赁负债",
+      "aliases": [
+        "租赁负债"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "承租人尚未支付的租赁付款额，按租赁期开始日现值计量。不是把未来每期租金直接相加。",
+      "example": "未来三年每年末支付 10 万元，折现率给定；把三年付款折成今天的价值，才是租赁负债的初始口径。"
+    },
+    {
+      "id": "amortized-cost",
+      "term": "Amortized Cost",
+      "full": "Amortized Cost",
+      "zh": "摊余成本",
+      "aliases": [
+        "摊余成本"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "金融资产或负债按实际利率法，在初始金额基础上逐期调整后的账面口径。不是简单的票面本金。",
+      "example": "债券买价和面值不同，后续要用实际利率法确认利息收入并调整余额，形成每期摊余成本。"
+    },
+    {
+      "id": "eir",
+      "term": "EIR",
+      "full": "Effective Interest Rate",
+      "zh": "实际利率",
+      "aliases": [
+        "实际利率"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "把合同现金流折现到金融资产或负债初始账面金额的利率。做题时别把它和票面利率混为一谈。",
+      "example": "债券票面利率 5%，但买价有折价，实际利率可能高于 5%。"
+    },
+    {
+      "id": "ecl",
+      "term": "ECL",
+      "full": "Expected Credit Loss",
+      "zh": "预期信用损失",
+      "aliases": [
+        "预期信用损失",
+        "预期信用损失模型"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "按未来可能违约造成的现金短缺概率加权出来的信用损失。不是等客户彻底失联才确认。",
+      "example": "应收账款按账龄和违约概率估计未来收不回的金额，属于 ECL 思路。"
+    },
+    {
+      "id": "sppi",
+      "term": "SPPI",
+      "full": "Solely Payments of Principal and Interest on the Principal Amount Outstanding",
+      "zh": "本金及未偿本金利息",
+      "aliases": [
+        "本金加利息",
+        "SPPI 测试"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "判断金融资产合同现金流是否只包含本金和利息的测试。它是金融资产分类的关键条件之一。",
+      "example": "普通固定利率贷款通常较容易通过 SPPI；带有复杂权益挂钩条款的产品则要认真判断。"
+    },
+    {
+      "id": "fvtpl",
+      "term": "FVTPL",
+      "full": "Fair Value through Profit or Loss",
+      "zh": "以公允价值计量且其变动计入当期损益",
+      "aliases": [
+        "交易性金融资产",
+        "公允价值变动计入当期损益"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "资产按公允价值计量，公允价值变动直接影响当期利润。关键词是“当期损益”，不是其他综合收益。",
+      "example": "交易性金融资产期末涨价，通常把公允价值变动计入公允价值变动损益，影响当期利润。"
+    },
+    {
+      "id": "fvoci",
+      "term": "FVOCI",
+      "full": "Fair Value through Other Comprehensive Income",
+      "zh": "以公允价值计量且其变动计入其他综合收益",
+      "aliases": [
+        "其他债权投资",
+        "其他权益工具投资",
+        "公允价值变动计入其他综合收益"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "资产按公允价值计量，但符合条件的公允价值变动先进入其他综合收益，不直接计入当期损益。",
+      "example": "指定为 FVOCI 的权益工具，公允价值变化通常先进 OCI，而不是直接进净利润。"
+    },
+    {
+      "id": "dta",
+      "term": "DTA",
+      "full": "Deferred Tax Asset",
+      "zh": "递延所得税资产",
+      "aliases": [
+        "递延所得税资产"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "未来预计可以少交税的权利，通常由可抵扣暂时性差异等形成。确认时还要看未来是否有足够应纳税所得额。",
+      "example": "本期多交了将来能抵的税，或存在可抵扣暂时性差异，可能形成 DTA。"
+    },
+    {
+      "id": "deferred-tax-liability",
+      "term": "DTL (Tax)",
+      "full": "Deferred Tax Liability",
+      "zh": "递延所得税负债",
+      "aliases": [
+        "递延所得税负债"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "未来预计要多交税的义务，通常由应纳税暂时性差异形成。",
+      "example": "会计账面价值高于计税基础、未来会转回多缴税时，可能形成 DTL。"
+    },
+    {
+      "id": "tax-base",
+      "term": "Tax Base",
+      "full": "Tax Base",
+      "zh": "计税基础",
+      "aliases": [
+        "计税基础"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "按税法口径计算资产或负债时使用的金额。它用来和会计账面价值比较，找暂时性差异。",
+      "example": "固定资产会计账面价值 80 万元，税法上还可扣除 60 万元，计税基础可能是 60 万元。"
+    },
+    {
+      "id": "taxable-temporary-difference",
+      "term": "Taxable Temporary Difference",
+      "full": "Taxable Temporary Difference",
+      "zh": "应纳税暂时性差异",
+      "aliases": [
+        "应纳税暂时性差异"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "未来收回资产或清偿负债时，会导致应纳税所得额增加的暂时性差异，通常对应递延所得税负债。",
+      "example": "资产账面价值大于计税基础，未来多缴税的方向通常形成应纳税暂时性差异。"
+    },
+    {
+      "id": "deductible-temporary-difference",
+      "term": "Deductible Temporary Difference",
+      "full": "Deductible Temporary Difference",
+      "zh": "可抵扣暂时性差异",
+      "aliases": [
+        "可抵扣暂时性差异"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "未来收回资产或清偿负债时，会导致应纳税所得额减少的暂时性差异，通常对应递延所得税资产。",
+      "example": "资产账面价值小于计税基础，未来可少缴税的方向通常形成可抵扣暂时性差异。"
+    },
+    {
+      "id": "current-tax",
+      "term": "Current Tax",
+      "full": "Current Tax",
+      "zh": "当期所得税",
+      "aliases": [
+        "当期所得税",
+        "当期所得税费用"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "按税法对本年应纳税所得额计算的当期应交所得税。它和递延所得税一起构成所得税费用的一部分。",
+      "example": "应纳税所得额 100 万元、税率 25%，在不考虑其他因素时，当期所得税为 25 万元。"
+    },
+    {
+      "id": "deferred-tax",
+      "term": "Deferred Tax",
+      "full": "Deferred Tax",
+      "zh": "递延所得税",
+      "aliases": [
+        "递延所得税"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "由暂时性差异产生的未来纳税影响，包括递延所得税资产和递延所得税负债的变动。",
+      "example": "本期新增可抵扣暂时性差异，可能确认递延所得税资产，并影响所得税费用或其他综合收益。"
+    },
+    {
+      "id": "revenue",
+      "term": "Revenue",
+      "full": "Revenue",
+      "zh": "收入",
+      "aliases": [
+        "收入",
+        "营业收入"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业在日常活动中因交付商品、提供服务等取得的对价。确认收入的关键是履约义务和控制权转移，不是开票本身。",
+      "example": "商品控制权已经转移，即使客户还没付款，也可能满足收入确认条件。"
+    },
+    {
+      "id": "contract-liability",
+      "term": "Contract Liability",
+      "full": "Contract Liability",
+      "zh": "合同负债",
+      "aliases": [
+        "合同负债",
+        "预收账款"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "企业已经收到客户对价或拥有收款权利，但还没履行履约义务，欠客户的是“交货或服务”，不是现金。",
+      "example": "客户先付 10 万元，企业还没发货，通常先确认合同负债；履约后再转收入。"
+    },
+    {
+      "id": "contract-asset",
+      "term": "Contract Asset",
+      "full": "Contract Asset",
+      "zh": "合同资产",
+      "aliases": [
+        "合同资产"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "企业已向客户转让商品或服务，但收款权利还取决于时间之外的其他条件时形成的资产。",
+      "example": "工程已干了一部分，但还要等验收才能无条件收款，相关权利可能先列合同资产。"
+    },
+    {
+      "id": "trade-receivable",
+      "term": "Trade Receivable",
+      "full": "Trade Receivable",
+      "zh": "应收账款",
+      "aliases": [
+        "应收账款"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业因销售商品或提供服务应向客户收取的款项，属于无条件收款权利。",
+      "example": "货已交付、发票已开，客户月底付款，这笔应收通常记应收账款。"
+    },
+    {
+      "id": "trade-payable",
+      "term": "Trade Payable",
+      "full": "Trade Payable",
+      "zh": "应付账款",
+      "aliases": [
+        "应付账款"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业因采购商品或接受服务而欠供应商的钱。它通常属于经营性负债。",
+      "example": "采购原料 20 万元，货到票到但下月付款，企业先确认应付账款。"
+    },
+    {
+      "id": "inventory",
+      "term": "Inventory",
+      "full": "Inventory",
+      "zh": "存货",
+      "aliases": [
+        "存货"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业持有待售、处在生产过程中或将在生产、劳务中耗用的材料、在产品、产成品等。",
+      "example": "制造企业的原料、在产品和库存商品通常都是存货；房企准备出售的房子也可能按存货处理。"
+    },
+    {
+      "id": "cogs",
+      "term": "COGS",
+      "full": "Cost of Goods Sold",
+      "zh": "营业成本／销货成本",
+      "aliases": [
+        "营业成本",
+        "主营业务成本",
+        "销货成本"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "已经卖出去的存货成本，通常从存货转入营业成本。它和“买材料的采购支出”不是同一时点。",
+      "example": "本月卖出成本 60 万元的商品，营业成本增加 60 万元，即使货款还没收齐也一样。"
+    },
+    {
+      "id": "depreciation",
+      "term": "Depreciation",
+      "full": "Depreciation",
+      "zh": "折旧",
+      "aliases": [
+        "折旧",
+        "累计折旧"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "固定资产在使用寿命内，把成本系统地分摊到各期的过程。折旧费用不直接等于当期现金流出。",
+      "example": "设备原价 100 万元，预计使用 5 年、无残值，年限平均法下每年折旧 20 万元。"
+    },
+    {
+      "id": "amortization",
+      "term": "Amortization",
+      "full": "Amortization",
+      "zh": "摊销",
+      "aliases": [
+        "摊销",
+        "累计摊销"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "把无形资产等长期资产成本在使用寿命内系统分摊；也用于金融资产按实际利率法调整账面价值。",
+      "example": "软件成本 60 万元，按 5 年直线摊销，每年摊销 12 万元。"
+    },
+    {
+      "id": "employee-benefits",
+      "term": "Employee Benefits",
+      "full": "Employee Benefits",
+      "zh": "职工薪酬",
+      "aliases": [
+        "职工薪酬",
+        "应付职工薪酬"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "企业为获得职工服务而支付或承担的各种形式报酬，不只有工资，还包括社保、公积金、福利、辞退福利等。",
+      "example": "工资、单位承担的社保、住房公积金和符合条件的辞退补偿，都属于职工薪酬范围。"
+    },
+    {
+      "id": "provision",
+      "term": "Provision",
+      "full": "Provision",
+      "zh": "预计负债",
+      "aliases": [
+        "预计负债"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "金额和时间不确定，但已经满足现时义务、很可能流出经济利益且能可靠计量的负债。",
+      "example": "已售产品很可能发生保修支出，且金额能估计，可能确认预计负债和销售费用。"
+    },
+    {
+      "id": "contingent-liability",
+      "term": "Contingent Liability",
+      "full": "Contingent Liability",
+      "zh": "或有负债",
+      "aliases": [
+        "或有负债"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "是否发生、金额多少还不确定的潜在义务或现时义务。通常不确认，达到条件时披露。",
+      "example": "公司被起诉但败诉可能性和金额都不确定，通常先作为或有事项披露，而不是直接确认预计负债。"
+    },
+    {
+      "id": "share-based-payment",
+      "term": "Share-based Payment",
+      "full": "Share-based Payment",
+      "zh": "股份支付",
+      "aliases": [
+        "股份支付"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "企业以股份或股份相关权益作为对价，换取职工或其他方服务的交易。",
+      "example": "给员工股票期权，换取未来服务，属于股份支付；不是等员工行权才一次性记费用。"
+    },
+    {
+      "id": "eps",
+      "term": "EPS",
+      "full": "Earnings per Share",
+      "zh": "每股收益",
+      "aliases": [
+        "每股收益"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "归属于普通股股东的利润除以普通股加权平均股数。分子和分母的口径要一致。",
+      "example": "归母净利润 1000 万元，普通股加权平均 500 万股，基本 EPS = 2 元/股。"
+    },
+    {
+      "id": "business-combination",
+      "term": "Business Combination",
+      "full": "Business Combination",
+      "zh": "企业合并",
+      "aliases": [
+        "企业合并"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "将两个或两个以上单独企业或业务合并成一个报告主体的交易或事项。先判断是不是“业务”。",
+      "example": "收购一家有投入、过程、产出能力的公司，通常构成企业合并；只买一组没有业务能力的资产可能不是。"
+    },
+    {
+      "id": "common-control",
+      "term": "Common Control",
+      "full": "Business Combination under Common Control",
+      "zh": "同一控制下企业合并",
+      "aliases": [
+        "同一控制",
+        "同一控制下企业合并"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "合并前后最终控制方相同。通常按账面价值思路处理，不产生新的商誉。",
+      "example": "集团内部两家子公司合并，最终都受同一集团控制，通常属于同一控制下合并。"
+    },
+    {
+      "id": "control",
+      "term": "Control",
+      "full": "Control",
+      "zh": "控制",
+      "aliases": [
+        "控制",
+        "控制权"
+      ],
+      "subjects": [
+        "practice",
+        "finance"
+      ],
+      "plain": "投资方拥有对被投资方的权力，能通过参与相关活动影响可变回报，并有权获得该回报。不是只看持股 50%。",
+      "example": "持股 45% 但通过协议掌握董事会多数表决权，仍可能构成控制。"
+    },
+    {
+      "id": "significant-influence",
+      "term": "Significant Influence",
+      "full": "Significant Influence",
+      "zh": "重大影响",
+      "aliases": [
+        "重大影响"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "对被投资方财务和经营政策有参与决策权力，但不能控制或共同控制。通常对应联营企业。",
+      "example": "持股 20% 并派一名董事参与经营决策，通常可能构成重大影响。"
+    },
+    {
+      "id": "joint-venture",
+      "term": "Joint Venture",
+      "full": "Joint Venture",
+      "zh": "合营企业",
+      "aliases": [
+        "合营企业",
+        "合营安排"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "共同控制下，各方对净资产享有权利的合营安排。它和共同经营的权利义务结构不同。",
+      "example": "两方共同控制一家独立公司，按净资产分享回报，通常按合营企业处理。"
+    },
+    {
+      "id": "associate",
+      "term": "Associate",
+      "full": "Associate",
+      "zh": "联营企业",
+      "aliases": [
+        "联营企业"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "投资方能够施加重大影响，但不构成控制或共同控制的被投资单位。",
+      "example": "持有 30% 股权并参与重大决策，通常属于联营企业，个别报表常用权益法。"
+    },
+    {
+      "id": "tvm",
+      "term": "TVM",
+      "full": "Time Value of Money",
+      "zh": "货币时间价值",
+      "aliases": [
+        "货币时间价值",
+        "时间价值"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "今天的钱和未来同额的钱不等值，因为今天的钱可以投资生息。做题先画时间轴，确认期数和利率口径。",
+      "example": "今天 100 元按 5% 复利一年后是 105 元；一年后的 105 元折回今天才是 100 元。"
+    },
+    {
+      "id": "pmt",
+      "term": "PMT",
+      "full": "Payment",
+      "zh": "每期收付款额",
+      "aliases": [
+        "年金",
+        "每期付款",
+        "每期收付款"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "年金计算中每期固定收付的金额。题目先判断是期初付还是期末付。",
+      "example": "租约每年末付 10 万元，连续 5 年，10 万元就是 PMT。"
+    },
+    {
+      "id": "fva",
+      "term": "FVA",
+      "full": "Future Value of an Annuity",
+      "zh": "年金终值",
+      "aliases": [
+        "年金终值"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "把每期固定收付的钱，按复利算到最后一期时点的合计价值。",
+      "example": "每年末存 1 万元，连续 3 年，按 5% 复利，第三年末的总金额就是年金终值。"
+    },
+    {
+      "id": "pva",
+      "term": "PVA",
+      "full": "Present Value of an Annuity",
+      "zh": "年金现值",
+      "aliases": [
+        "年金现值"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "把未来每期固定收付的钱逐期折现到今天，再加总。",
+      "example": "未来 5 年每年末收 10 万元，按给定折现率折成今天的价值，就是年金现值。"
+    },
+    {
+      "id": "dcf",
+      "term": "DCF",
+      "full": "Discounted Cash Flow",
+      "zh": "现金流量折现法",
+      "aliases": [
+        "现金流量折现",
+        "折现现金流"
+      ],
+      "subjects": [
+        "finance",
+        "practice"
+      ],
+      "plain": "把未来预计现金流按合适折现率折回今天，用来估值或判断项目价值。",
+      "example": "项目未来三年现金流分别折现后相加，得到项目当前价值。"
+    },
+    {
+      "id": "npv",
+      "term": "NPV",
+      "full": "Net Present Value",
+      "zh": "净现值",
+      "aliases": [
+        "净现值"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "项目未来现金流现值减去初始投资。NPV 大于 0，通常说明按给定折现率项目能创造价值。",
+      "example": "未来现金流现值 120 万元，初始投资 100 万元，NPV = 20 万元。"
+    },
+    {
+      "id": "irr",
+      "term": "IRR",
+      "full": "Internal Rate of Return",
+      "zh": "内含报酬率",
+      "aliases": [
+        "内含报酬率",
+        "内部收益率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "让项目 NPV 等于 0 的折现率。互斥项目比较时，不能只看 IRR 高低，还要看规模和资金成本。",
+      "example": "折现率取 12% 时 NPV 为 0，则 IRR 就是 12%。"
+    },
+    {
+      "id": "pi",
+      "term": "PI",
+      "full": "Profitability Index",
+      "zh": "现值指数",
+      "aliases": [
+        "现值指数",
+        "获利指数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "未来现金流现值除以初始投资。PI 大于 1，通常表示项目可行。",
+      "example": "未来现金流现值 120 万元，初始投资 100 万元，PI = 1.2。"
+    },
+    {
+      "id": "wacc",
+      "term": "WACC",
+      "full": "Weighted Average Cost of Capital",
+      "zh": "加权平均资本成本",
+      "aliases": [
+        "加权平均资本成本",
+        "加权平均资本成本率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "债务和权益资金成本按资本结构权重加权后的综合成本。债务成本通常要用税后口径。",
+      "example": "债务占比 40%、税后债务成本 6%，权益占比 60%、权益成本 12%，WACC = 40%×6% + 60%×12% = 9.6%。"
+    },
+    {
+      "id": "capm",
+      "term": "CAPM",
+      "full": "Capital Asset Pricing Model",
+      "zh": "资本资产定价模型",
+      "aliases": [
+        "资本资产定价模型"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "用无风险利率加系统风险溢价来估算权益资本成本。它只补偿系统风险，不补偿可通过分散化消掉的非系统风险。",
+      "example": "无风险利率 3%，β=1.2，市场风险溢价 5%，权益成本 = 3% + 1.2×5% = 9%。"
+    },
+    {
+      "id": "beta",
+      "term": "Beta",
+      "full": "Beta Coefficient",
+      "zh": "贝塔系数",
+      "aliases": [
+        "贝塔系数",
+        "β系数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "衡量单项资产相对于市场组合的系统风险敏感度。β=1 表示与市场同步波动。",
+      "example": "β=1.5，市场整体收益变动 1%，该资产要求的系统风险补偿通常按 1.5 倍变化。"
+    },
+    {
+      "id": "risk-free-rate",
+      "term": "Risk-free Rate",
+      "full": "Risk-free Rate",
+      "zh": "无风险利率",
+      "aliases": [
+        "无风险利率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "投资者在几乎无违约风险的投资上要求的收益率，常见参考为短期国债利率。",
+      "example": "CAPM 中无风险利率是起点，再加风险溢价形成必要报酬率。"
+    },
+    {
+      "id": "market-risk-premium",
+      "term": "Market Risk Premium",
+      "full": "Market Risk Premium",
+      "zh": "市场风险溢价",
+      "aliases": [
+        "市场风险溢价"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "市场组合预期收益率超过无风险利率的部分，是投资者承担市场系统风险要求的额外补偿。",
+      "example": "市场预期收益 8%，无风险利率 3%，市场风险溢价 = 5%。"
+    },
+    {
+      "id": "dol",
+      "term": "DOL",
+      "full": "Degree of Operating Leverage",
+      "zh": "经营杠杆系数",
+      "aliases": [
+        "经营杠杆",
+        "经营杠杆系数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "息税前利润对营业收入变化的敏感程度，固定经营成本越高，通常经营杠杆越大、风险越高。",
+      "example": "收入增长 10%，EBIT 增长 20%，经营杠杆系数为 2。"
+    },
+    {
+      "id": "dfl",
+      "term": "DFL",
+      "full": "Degree of Financial Leverage",
+      "zh": "财务杠杆系数",
+      "aliases": [
+        "财务杠杆",
+        "财务杠杆系数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "每股收益对 EBIT 变化的敏感程度，固定融资成本越高，通常财务杠杆越大。",
+      "example": "EBIT 增长 10%，EPS 增长 15%，财务杠杆系数为 1.5。"
+    },
+    {
+      "id": "dtl-leverage",
+      "term": "DTL (Leverage)",
+      "full": "Degree of Total Leverage",
+      "zh": "总杠杆系数",
+      "aliases": [
+        "总杠杆",
+        "总杠杆系数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "经营杠杆和财务杠杆共同作用，衡量 EPS 对营业收入变化的综合敏感程度。",
+      "example": "经营杠杆 2、财务杠杆 1.5，总杠杆 = 2×1.5 = 3。"
+    },
+    {
+      "id": "ebit",
+      "term": "EBIT",
+      "full": "Earnings Before Interest and Taxes",
+      "zh": "息税前利润",
+      "aliases": [
+        "息税前利润"
+      ],
+      "subjects": [
+        "finance",
+        "practice"
+      ],
+      "plain": "还没扣利息和所得税的利润，用来观察经营层面赚钱能力。",
+      "example": "净利润 60 万元，所得税 20 万元，利息 10 万元，EBIT 通常是 90 万元。"
+    },
+    {
+      "id": "ebitda",
+      "term": "EBITDA",
+      "full": "Earnings Before Interest, Taxes, Depreciation and Amortization",
+      "zh": "息税折旧摊销前利润",
+      "aliases": [
+        "息税折旧摊销前利润"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "在 EBIT 基础上再加回折旧和摊销，常用来近似观察经营现金创造能力，但它不是严格现金流。",
+      "example": "EBIT 90 万元，折旧 15 万元，摊销 5 万元，EBITDA = 110 万元。"
+    },
+    {
+      "id": "roe",
+      "term": "ROE",
+      "full": "Return on Equity",
+      "zh": "净资产收益率",
+      "aliases": [
+        "净资产收益率",
+        "权益净利率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "净利润相对于股东权益的回报率。杜邦分析把 ROE 拆成盈利、周转和杠杆三部分。",
+      "example": "净利润 100 万元，平均股东权益 500 万元，ROE = 20%。"
+    },
+    {
+      "id": "roa",
+      "term": "ROA",
+      "full": "Return on Assets",
+      "zh": "总资产收益率",
+      "aliases": [
+        "总资产收益率",
+        "资产净利率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "利润相对于平均总资产的回报率，用来观察全部资产的盈利效率，不受融资结构直接影响。",
+      "example": "净利润 100 万元，平均总资产 1000 万元，ROA = 10%。"
+    },
+    {
+      "id": "eva",
+      "term": "EVA",
+      "full": "Economic Value Added",
+      "zh": "经济增加值",
+      "aliases": [
+        "经济增加值"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "税后经营利润减去资本成本后的剩余价值。它比会计利润多扣了一层“资本不是免费的”。",
+      "example": "税后经营利润 120 万元，投入资本 1000 万元，资本成本率 10%，EVA = 120 - 100 = 20 万元。"
+    },
+    {
+      "id": "eoq",
+      "term": "EOQ",
+      "full": "Economic Order Quantity",
+      "zh": "经济订货批量",
+      "aliases": [
+        "经济订货批量",
+        "经济批量"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "让订货成本和储存成本合计最低的每次订货数量。做题先分清订货成本和储存成本的动因。",
+      "example": "年需求量、每次订货成本和单位储存成本给定后，套 EOQ 公式求每次买多少最省。"
+    },
+    {
+      "id": "abc",
+      "term": "ABC",
+      "full": "Activity-Based Costing",
+      "zh": "作业成本法",
+      "aliases": [
+        "作业成本法",
+        "作业成本"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "按作业和成本动因分配间接成本，而不是只按一个简单人工工时或机器工时分摊。",
+      "example": "质检费用按质检次数分配，调试费用按调试次数分配，比全部按工时更贴近成本动因。"
+    },
+    {
+      "id": "bsc",
+      "term": "BSC",
+      "full": "Balanced Scorecard",
+      "zh": "平衡计分卡",
+      "aliases": [
+        "平衡计分卡"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "从财务、客户、内部流程、学习与成长四个维度评价绩效，避免只盯财务指标。",
+      "example": "除了收入增长，还可以看客户满意度、交付周期、员工培训达成率。"
+    },
+    {
+      "id": "fcf",
+      "term": "FCF",
+      "full": "Free Cash Flow",
+      "zh": "自由现金流",
+      "aliases": [
+        "自由现金流"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "企业经营产生的现金在满足必要资本支出后，可自由用于偿债、分红或再投资的现金。",
+      "example": "经营现金流 150 万元，资本支出 60 万元，简化口径下 FCF 为 90 万元。"
+    },
+    {
+      "id": "ocf",
+      "term": "OCF",
+      "full": "Operating Cash Flow",
+      "zh": "经营现金流",
+      "aliases": [
+        "经营现金流",
+        "经营活动现金流量"
+      ],
+      "subjects": [
+        "finance",
+        "practice"
+      ],
+      "plain": "企业日常经营活动实际产生或流出的现金，不等于利润表上的营业收入或净利润。",
+      "example": "利润 100 万元，但客户大量赊账，经营现金流可能反而很低。"
+    },
+    {
+      "id": "cash-conversion-cycle",
+      "term": "Cash Conversion Cycle",
+      "full": "Cash Conversion Cycle (CCC)",
+      "zh": "现金周转期",
+      "aliases": [
+        "现金周转期",
+        "现金周转天数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "从付钱买货到收回销售款经历的时间，通常等于存货周转天数加应收账款周转天数，再减应付账款周转天数。",
+      "example": "存货 60 天、应收 40 天、应付 30 天，现金周转期 = 60 + 40 - 30 = 70 天。"
+    },
+    {
+      "id": "break-even-point",
+      "term": "Break-even Point",
+      "full": "Break-even Point",
+      "zh": "保本点",
+      "aliases": [
+        "保本点",
+        "盈亏平衡点"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "收入刚好覆盖成本、利润为零时的销售量或销售额。",
+      "example": "固定成本 60000 元，单价 50 元，单位变动成本 30 元，保本销量 = 60000 ÷ 20 = 3000 件。"
+    },
+    {
+      "id": "safety-margin",
+      "term": "Safety Margin",
+      "full": "Margin of Safety",
+      "zh": "安全边际",
+      "aliases": [
+        "安全边际",
+        "安全边际率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "实际或预计销售量超过保本点的部分，表示销量下降多少才会亏钱。",
+      "example": "预计销量 5000 件，保本销量 3000 件，安全边际量是 2000 件。"
+    },
+    {
+      "id": "standard-cost",
+      "term": "Standard Cost",
+      "full": "Standard Cost",
+      "zh": "标准成本",
+      "aliases": [
+        "标准成本"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "在合理效率和生产条件下预先制定的成本额度，用来和实际成本比较、分析差异。",
+      "example": "标准用量 2 千克、标准单价 10 元，标准材料成本为 20 元/件。"
+    },
+    {
+      "id": "variance",
+      "term": "Variance",
+      "full": "Cost Variance",
+      "zh": "成本差异",
+      "aliases": [
+        "成本差异",
+        "差异分析"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "实际成本与标准成本之间的差额，通常拆成价格差异和数量差异来找原因。",
+      "example": "实际材料成本 24 元，标准 20 元，总差异 4 元，再判断是买贵了还是用多了。"
+    },
+    {
+      "id": "dividend-payout-ratio",
+      "term": "Dividend Payout Ratio",
+      "full": "Dividend Payout Ratio",
+      "zh": "股利支付率",
+      "aliases": [
+        "股利支付率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "现金股利占净利润的比例，反映赚到的利润有多少分给股东。",
+      "example": "净利润 100 万元，现金股利 40 万元，股利支付率 = 40%。"
+    },
+    {
+      "id": "current-ratio",
+      "term": "Current Ratio",
+      "full": "Current Ratio",
+      "zh": "流动比率",
+      "aliases": [
+        "流动比率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "流动资产除以流动负债，观察短期偿债能力。不是越高越好，还要看资产变现质量。",
+      "example": "流动资产 200 万元，流动负债 100 万元，流动比率 = 2。"
+    },
+    {
+      "id": "quick-ratio",
+      "term": "Quick Ratio",
+      "full": "Quick Ratio",
+      "zh": "速动比率",
+      "aliases": [
+        "速动比率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "把存货等变现慢的流动资产扣掉后，再和流动负债比较，比流动比率更严格。",
+      "example": "流动资产 200 万元，存货 80 万元，流动负债 100 万元，速动比率 = 120÷100 = 1.2。"
+    },
+    {
+      "id": "interest-coverage",
+      "term": "Interest Coverage Ratio",
+      "full": "Interest Coverage Ratio",
+      "zh": "利息保障倍数",
+      "aliases": [
+        "利息保障倍数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "息税前利润相对于利息费用的倍数，反映经营利润覆盖利息的能力。",
+      "example": "EBIT 90 万元，利息费用 30 万元，利息保障倍数 = 3。"
+    },
+    {
+      "id": "asset-turnover",
+      "term": "Asset Turnover",
+      "full": "Total Asset Turnover",
+      "zh": "总资产周转率",
+      "aliases": [
+        "总资产周转率"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "营业收入相对于平均总资产的周转效率，表示每一元资产能带来多少收入。",
+      "example": "营业收入 1000 万元，平均总资产 500 万元，总资产周转率 = 2 次。"
+    },
+    {
+      "id": "equity-multiplier",
+      "term": "Equity Multiplier",
+      "full": "Equity Multiplier",
+      "zh": "权益乘数",
+      "aliases": [
+        "权益乘数"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "总资产除以股东权益，反映财务杠杆大小。权益乘数越高，通常负债越多、风险越大。",
+      "example": "总资产 1000 万元，股东权益 500 万元，权益乘数 = 2。"
+    },
+    {
+      "id": "dupont",
+      "term": "DuPont Analysis",
+      "full": "DuPont Analysis",
+      "zh": "杜邦分析",
+      "aliases": [
+        "杜邦分析",
+        "杜邦分析法"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "把 ROE 拆成营业净利率、总资产周转率和权益乘数，分别看赚钱、效率和杠杆。",
+      "example": "ROE = 10%×2×1.5 = 30%，说明盈利、周转和杠杆共同形成回报。"
+    },
+    {
+      "id": "legal-person",
+      "term": "Legal Person",
+      "full": "Legal Person",
+      "zh": "法人",
+      "aliases": [
+        "法人"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "法律承认具有民事权利能力和民事行为能力、能独立承担民事责任的组织。它不是“法定代表人”的简称。",
+      "example": "依法设立的有限责任公司通常是法人；公司老板个人不是“法人”这个词本身。"
+    },
+    {
+      "id": "legal-act",
+      "term": "Legal Act",
+      "full": "Legal Act",
+      "zh": "法律行为",
+      "aliases": [
+        "法律行为"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "以意思表示为要素、旨在发生一定法律效果的行为。先判断有没有真实意思表示，再判断效力。",
+      "example": "签订合同、立遗嘱通常属于法律行为；单纯的自然事件不是。"
+    },
+    {
+      "id": "agency",
+      "term": "Agency",
+      "full": "Agency",
+      "zh": "代理",
+      "aliases": [
+        "代理",
+        "代理人"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "代理人在代理权限内，以被代理人名义实施法律行为，后果由被代理人承担。关键词是权限和名义。",
+      "example": "员工拿着授权书以公司名义签合同，可能在授权范围内构成代理。"
+    },
+    {
+      "id": "apparent-authority",
+      "term": "Apparent Authority",
+      "full": "Apparent Authority",
+      "zh": "表见代理",
+      "aliases": [
+        "表见代理",
+        "表见代理权"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "行为人本来没有代理权，但相对人有理由相信其有代理权，法律为保护交易安全而让被代理人承担相应后果。",
+      "example": "员工离职后仍持公司公章和授权文件签约，相对人善意无过失时，可能构成表见代理。"
+    },
+    {
+      "id": "statute-of-limitations",
+      "term": "Statute of Limitations",
+      "full": "Statute of Limitations",
+      "zh": "诉讼时效",
+      "aliases": [
+        "诉讼时效",
+        "时效期间"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "权利人在法定期间内不行使权利，义务人可能获得抗辩权的制度。中止和中断的效果不同，具体期间以 2026 教材为准。",
+      "example": "权利人提起诉讼通常可能引起时效中断；不可抗力发生在最后六个月，可能涉及中止。"
+    },
+    {
+      "id": "arbitration",
+      "term": "Arbitration",
+      "full": "Arbitration",
+      "zh": "仲裁",
+      "aliases": [
+        "仲裁",
+        "仲裁协议"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "当事人根据仲裁协议，把争议交给仲裁机构裁决。有效仲裁协议通常排除法院对同一争议的受理。",
+      "example": "合同写有有效仲裁条款，发生争议时通常先走仲裁，而不是直接起诉。"
+    },
+    {
+      "id": "liquidation",
+      "term": "Liquidation",
+      "full": "Liquidation",
+      "zh": "清算",
+      "aliases": [
+        "清算",
+        "公司清算"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "公司终止前清理财产、了结债权债务、分配剩余财产的程序。清算义务人有法定职责，不能一走了之。",
+      "example": "公司解散后应依法成立清算组，处理债权债务，而不是直接注销。"
+    },
+    {
+      "id": "shareholders-meeting",
+      "term": "Shareholders' Meeting",
+      "full": "Shareholders' Meeting",
+      "zh": "股东会",
+      "aliases": [
+        "股东会",
+        "股东大会"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "公司的权力机构，决定重大事项。具体职权、召集程序和表决比例要以 2026 教材和法规为准。",
+      "example": "修改章程、重大投资等事项通常需要股东会决议，不能由经理单独决定。"
+    },
+    {
+      "id": "board-of-directors",
+      "term": "Board of Directors",
+      "full": "Board of Directors",
+      "zh": "董事会",
+      "aliases": [
+        "董事会"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "公司的经营决策机构，对股东会负责。不同公司类型的设置和职权可能有差异。",
+      "example": "董事会通常负责执行股东会决议、决定经营计划等，但不能越权处理应由股东会决定的事项。"
+    },
+    {
+      "id": "supervisor",
+      "term": "Supervisor",
+      "full": "Supervisor / Board of Supervisors",
+      "zh": "监事／监事会",
+      "aliases": [
+        "监事",
+        "监事会"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "监督公司董事、高级管理人员履职的机构或人员。新公司法下公司治理结构可能有替代安排，需按教材口径核对。",
+      "example": "监事会可以检查公司财务、监督董事和高管，但具体设置方式要看公司类型和法规。"
+    },
+    {
+      "id": "capital-contribution",
+      "term": "Capital Contribution",
+      "full": "Capital Contribution",
+      "zh": "出资",
+      "aliases": [
+        "出资",
+        "注册资本",
+        "认缴出资"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "股东或合伙人按约定向企业投入资本。认缴不等于不用缴，具体期限和责任要按现行法规判断。",
+      "example": "股东认缴 100 万元但未按期缴纳，可能要对公司或债权人承担相应责任。"
+    },
+    {
+      "id": "limited-liability",
+      "term": "Limited Liability",
+      "full": "Limited Liability",
+      "zh": "有限责任",
+      "aliases": [
+        "有限责任",
+        "有限责任制"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "股东通常以其认缴出资额或认购股份为限对公司债务承担责任，不是对企业所有债务无限兜底。",
+      "example": "有限责任公司股东原则上承担有限责任，但抽逃出资等情形可能产生额外责任。"
+    },
+    {
+      "id": "general-partnership",
+      "term": "GP",
+      "full": "General Partnership",
+      "zh": "普通合伙企业",
+      "aliases": [
+        "普通合伙企业",
+        "普通合伙人"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "普通合伙人对合伙企业债务通常承担无限连带责任，事务执行和责任边界是高频考点。",
+      "example": "普通合伙人不能像公司股东那样只以出资额为限承担责任。"
+    },
+    {
+      "id": "limited-partnership",
+      "term": "LP",
+      "full": "Limited Partnership",
+      "zh": "有限合伙企业",
+      "aliases": [
+        "有限合伙企业",
+        "有限合伙人"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "由普通合伙人和有限合伙人组成。有限合伙人通常以认缴出资额为限承担责任，但参与事务执行要谨慎判断。",
+      "example": "有限合伙人只在出资范围内承担有限责任，普通合伙人通常承担无限连带责任。"
+    },
+    {
+      "id": "offer",
+      "term": "Offer",
+      "full": "Offer",
+      "zh": "要约",
+      "aliases": [
+        "要约"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "希望与他人订立合同的意思表示，内容要具体确定，并表明经受要约人承诺即受约束。",
+      "example": "“这批货 100 元一件，今天下单就卖”可能构成要约；“欢迎来询价”通常只是要约邀请。"
+    },
+    {
+      "id": "acceptance",
+      "term": "Acceptance",
+      "full": "Acceptance",
+      "zh": "承诺",
+      "aliases": [
+        "承诺"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "受要约人同意要约的意思表示。承诺内容通常要与要约实质一致，迟到或变更要单独判断。",
+      "example": "对方完全接受报价并明确表示同意，通常构成承诺，合同可能成立。"
+    },
+    {
+      "id": "guarantee",
+      "term": "Guarantee",
+      "full": "Guarantee / Suretyship",
+      "zh": "保证",
+      "aliases": [
+        "保证",
+        "保证合同"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "保证人和债权人约定，当债务人不履行债务时，保证人按约定履行或承担责任。保证方式和期间要按教材核对。",
+      "example": "第三方为借款人的还款义务提供保证，债权人可在约定条件下向保证人主张。"
+    },
+    {
+      "id": "mortgage",
+      "term": "Mortgage",
+      "full": "Mortgage",
+      "zh": "抵押",
+      "aliases": [
+        "抵押",
+        "抵押权"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "债务人或第三人不转移财产占有，将该财产作为债权担保。关键词是“不转移占有”。",
+      "example": "用厂房抵押借款，厂房通常仍由企业占有使用，但抵押权人享有优先受偿权。"
+    },
+    {
+      "id": "pledge",
+      "term": "Pledge",
+      "full": "Pledge",
+      "zh": "质押",
+      "aliases": [
+        "质押",
+        "质权"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "债务人或第三人将动产或权利移交债权人占有作为担保。和抵押最大的区别通常是是否转移占有。",
+      "example": "把存单交给银行作为担保，可能构成权利质押。"
+    },
+    {
+      "id": "lien",
+      "term": "Lien",
+      "full": "Lien",
+      "zh": "留置",
+      "aliases": [
+        "留置",
+        "留置权"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "债权人合法占有债务人的动产，债务人不履行到期债务时，依法留置该动产并优先受偿的权利。",
+      "example": "修理厂修好车后，客户不付修理费，修理厂在符合条件时可能留置车辆。"
+    },
+    {
+      "id": "earnest-money",
+      "term": "Earnest Money",
+      "full": "Earnest Money / Deposit",
+      "zh": "定金",
+      "aliases": [
+        "定金",
+        "定金罚则"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "合同当事人约定的一方预先支付给对方的担保款项。定金罚则和违约金能否同时适用，是常见易错点。",
+      "example": "给付定金一方违约，可能无权要求返还定金；收受定金一方违约，可能要双倍返还。"
+    },
+    {
+      "id": "liquidated-damages",
+      "term": "Liquidated Damages",
+      "full": "Liquidated Damages",
+      "zh": "违约金",
+      "aliases": [
+        "违约金"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "合同预先约定的一方违约时应支付的金额。约定过高或过低时，可能涉及调整，不能机械全额照搬。",
+      "example": "合同约定逾期每天按合同额 1% 支付违约金，是否支持还要结合损失和调整规则。"
+    },
+    {
+      "id": "vat",
+      "term": "VAT",
+      "full": "Value-Added Tax",
+      "zh": "增值税",
+      "aliases": [
+        "增值税"
+      ],
+      "subjects": [
+        "law",
+        "practice"
+      ],
+      "plain": "对商品、服务、无形资产和不动产流转中的增值额征收的流转税。做题先分清销项、进项和不得抵扣。",
+      "example": "一般纳税人销售货物产生销项税额，采购取得合规扣税凭证可能形成可抵扣进项税额。"
+    },
+    {
+      "id": "output-vat",
+      "term": "Output VAT",
+      "full": "Output Value-Added Tax",
+      "zh": "销项税额",
+      "aliases": [
+        "销项税额",
+        "销项税"
+      ],
+      "subjects": [
+        "law",
+        "practice"
+      ],
+      "plain": "一般纳税人销售货物、服务等按销售额和适用税率计算的增值税额。价外费用是否并入销售额要按规则判断。",
+      "example": "不含税销售额 100 万元，税率 13%，销项税额 = 13 万元。"
+    },
+    {
+      "id": "input-vat",
+      "term": "Input VAT",
+      "full": "Input Value-Added Tax",
+      "zh": "进项税额",
+      "aliases": [
+        "进项税额",
+        "进项税",
+        "进项转出"
+      ],
+      "subjects": [
+        "law",
+        "practice"
+      ],
+      "plain": "一般纳税人采购时支付、符合条件可以抵扣的增值税额。不是所有进项都能抵，用途不合规要做转出。",
+      "example": "采购生产用材料取得合规专用发票，进项税额通常可抵扣；用于集体福利的购进项目则可能不得抵扣。"
+    },
+    {
+      "id": "taxable-income",
+      "term": "Taxable Income",
+      "full": "Taxable Income",
+      "zh": "应纳税所得额",
+      "aliases": [
+        "应纳税所得额",
+        "应税所得"
+      ],
+      "subjects": [
+        "law",
+        "practice"
+      ],
+      "plain": "按企业所得税税法口径计算的计税利润，不等于会计利润。通常要在会计利润基础上做纳税调整。",
+      "example": "会计利润 100 万元，纳税调增 10 万元、调减 5 万元，应纳税所得额可能是 105 万元。"
+    },
+    {
+      "id": "deductible-expense",
+      "term": "Deductible Expense",
+      "full": "Deductible Expense",
+      "zh": "可扣除支出",
+      "aliases": [
+        "税前扣除",
+        "可扣除项目",
+        "不得扣除项目"
+      ],
+      "subjects": [
+        "law",
+        "practice"
+      ],
+      "plain": "按企业所得税法规定，可以在计算应纳税所得额时扣除的真实、合理、与取得收入有关的支出。限额和凭证要一起看。",
+      "example": "合理的成本费用通常可扣，但行政罚款、与经营无关支出等可能不得扣除。"
+    },
+    {
+      "id": "tax-incentive",
+      "term": "Tax Incentive",
+      "full": "Tax Incentive",
+      "zh": "税收优惠",
+      "aliases": [
+        "税收优惠",
+        "减免税"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "税法规定的减税、免税、加计扣除等优惠。适用条件通常很具体，不是企业想用就能自动用。",
+      "example": "研发费用加计扣除要满足研发活动、费用归集和资料留存等条件。"
+    },
+    {
+      "id": "government-procurement",
+      "term": "Government Procurement",
+      "full": "Government Procurement",
+      "zh": "政府采购",
+      "aliases": [
+        "政府采购"
+      ],
+      "subjects": [
+        "law"
+      ],
+      "plain": "国家机关、事业单位和团体组织使用财政性资金采购依法制定的集中采购目录以内或限额标准以上的货物、工程和服务。",
+      "example": "是否必须公开招标，要看采购方式适用条件和金额标准，不能一概而论。"
+    },
+    {
+      "id": "gross-profit-method",
+      "term": "Gross Profit Method",
+      "full": "Gross Profit Method（毛利率法）",
+      "zh": "毛利率法",
+      "aliases": [
+        "毛利率法",
+        "毛利法"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "用已知或估计的毛利率倒推销售成本，再用期初存货加本期购入减销售成本，估算期末存货。",
+      "example": "销售净额100万元、毛利率20%，销售成本约80万元；期初20万元、购入90万元，则期末存货约30万元。"
+    },
+    {
+      "id": "retail-inventory-method",
+      "term": "Retail Inventory Method",
+      "full": "Retail Inventory Method（售价金额核算法）",
+      "zh": "售价金额核算法",
+      "aliases": [
+        "售价金额核算法",
+        "零售价法",
+        "售价金额法"
+      ],
+      "subjects": [
+        "practice"
+      ],
+      "plain": "商品按售价管理，先用进销差价率把售价还原成成本。关键不是售价本身，而是售价里含着多少进销差价。",
+      "example": "售价100万元、进销差价率20%，还原后的销售成本约为80万元。"
+    },
+    {
+      "id": "deferred-annuity",
+      "term": "Deferred Annuity",
+      "full": "Deferred Annuity（递延年金）",
+      "zh": "递延年金",
+      "aliases": [
+        "递延年金",
+        "延期年金"
+      ],
+      "subjects": [
+        "finance"
+      ],
+      "plain": "前面若干期没有收付，之后才开始等额收付。先分清递延期m和实际收付期数n，再套普通年金公式。",
+      "example": "第4年年末开始每年收10万元、连续5年，递延期3年、收付期数5年，现值需要先算普通年金现值再折现3期。"
+    }
+  ]
+}

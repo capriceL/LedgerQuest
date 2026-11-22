@@ -1,0 +1,35 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Static checks
+        run: node tools/check-html.mjs LedgerQuest.html
+      - name: Runtime smoke
+        run: node tools/smoke-runtime.mjs LedgerQuest.html
+      - name: Engine tests
+        run: node tools/test-engine.mjs LedgerQuest.html
+      - name: Sync tests
+        run: node tools/test-sync.mjs LedgerQuest.html
+      - name: Content structure audits
+        run: |
+          node tools/audit-concepts.mjs
+          node tools/audit-challenges.mjs
+          node tools/check-syllabus-coverage.mjs
+      - name: Teaching and copy audits
+        run: |
+          node tools/audit-teaching.mjs LedgerQuest.html
+          node tools/audit-formulas-v3.mjs
+          node tools/audit-copy-integrity.mjs
+          node tools/audit-english.mjs
+      - name: Learning quality audit
+        run: python3 tools/audit-learning-quality.py
