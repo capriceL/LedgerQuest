@@ -24,6 +24,7 @@ work/**/*before-*
 work/*.log
 work/*.csv
 work/*-audit.json
+!work/syllabus-audit.json
 
 # OS and editor files
 Thumbs.db
