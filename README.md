@@ -6,6 +6,11 @@
 
 直接打开根目录的 `LedgerQuest.html`，无需安装依赖或启动服务器。
 
+在线入口：
+
+- GitHub Pages：`https://capricel.github.io/LedgerQuest/`
+- 在线页面与离线主文件来自同一内容母版。
+
 ## 仓库结构
 
 ```text
@@ -47,11 +52,18 @@ python tools\audit-learning-quality.py
 
 ## 版本与发布
 
-- 当前版本：`0.6.1`
+- 当前版本：`0.6.2`
 - 版本记录：`CHANGELOG.md`
 - 历史版本：`history/snapshots/`
-- 完整分享包：`releases/LedgerQuest-v0.6.1.zip`
+- 完整分享包：`releases/LedgerQuest-v0.6.2.zip`
 - 发布文件校验：`releases/SHA256SUMS.txt`
+
+## v0.6.2 重点
+
+- 关卡知识卡默认展开，先看知识再作答。
+- 分录说明“什么时候用”，本题专属分录优先，整章通用分录折叠。
+- 每章剧情结束生成章节总结与三步综合会签，答错可重试。
+- 单文件保持零外部依赖；离线、在线和完整仓库包同源发布。
 
 ## 边界
 

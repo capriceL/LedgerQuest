@@ -1914,6 +1914,158 @@
     .recap-card { padding: 12px 10px; border: 1px solid var(--line); border-radius: 13px; background: #fff; text-align: center; }
     .recap-card b { display: block; color: var(--mint-deep); font-size: 20px; }
     .recap-card span { color: var(--muted); font-size: 9px; font-weight: 800; }
+    .chapter-summary {
+      margin-top: 15px;
+      padding: 16px;
+      border: 1px solid rgba(37, 136, 94, .18);
+      border-radius: 16px;
+      background:
+        radial-gradient(220px 120px at 100% 0%, rgba(255, 232, 163, .46), transparent 70%),
+        linear-gradient(135deg, #f2fbf4, #fffdf7);
+    }
+    .chapter-summary-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .chapter-summary-head .mini-avatar { flex: 0 0 auto; }
+    .chapter-summary h3 {
+      margin: 1px 0 5px;
+      color: var(--mint-deep);
+      font-size: 16px;
+      letter-spacing: -.02em;
+    }
+    .chapter-summary > p,
+    .chapter-summary-head p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .chapter-summary-list {
+      display: grid;
+      gap: 7px;
+      margin: 11px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .chapter-summary-list li {
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .78);
+      color: var(--ink-soft);
+      font-size: 11px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+    .chapter-summary-list b { color: var(--mint-deep); }
+    .chapter-summary-entry {
+      margin-top: 9px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: #fff8e8;
+      color: #715620;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .boss-brief {
+      padding: 14px 15px;
+      border: 1px solid #eedba7;
+      border-radius: 15px;
+      background:
+        radial-gradient(220px 120px at 100% 0%, rgba(255, 232, 163, .72), transparent 72%),
+        #fffdf8;
+      color: #68531f;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .boss-brief b { color: #5f4810; }
+    .boss-progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      margin: 15px 0 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .boss-sheet {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+    .boss-sheet h3 {
+      margin: 5px 0 6px;
+      color: var(--ink);
+      font-size: 20px;
+      letter-spacing: -.03em;
+      overflow-wrap: anywhere;
+    }
+    .boss-sheet > p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .boss-hint {
+      margin-top: 10px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: #f4f8f2;
+      color: #4d6650;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .boss-result {
+      margin-top: 12px;
+      padding: 13px 14px;
+      border-radius: 13px;
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+    .boss-result.correct { border: 1px solid #bfdfc6; background: #f0faf1; color: #245d3e; }
+    .boss-result.wrong { border: 1px solid #f0d0c9; background: #fff4f1; color: #81493e; }
+    .boss-result p { margin: 7px 0 0; color: inherit; font-size: 12px; line-height: 1.75; }
+    .boss-summary-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 13px;
+    }
+    .boss-summary-card {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .boss-summary-card b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--mint-deep);
+      font-size: 12px;
+    }
+    .boss-summary-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .boss-complete-seal {
+      display: grid;
+      place-items: center;
+      width: 66px;
+      height: 66px;
+      border: 2px solid rgba(37, 136, 94, .48);
+      border-radius: 50%;
+      color: var(--mint-deep);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-align: center;
+      transform: rotate(-7deg);
+    }
     .detail-section { margin-top: 19px; }
     .detail-section h3 {
       display: flex;
@@ -2366,6 +2518,35 @@
       line-height: 1.7;
     }
     .entry-math b { color: #26435b; }
+    .entry-when {
+      margin: 0 0 9px;
+      padding: 10px 11px;
+      border-left: 3px solid #e5b04d;
+      border-radius: 4px 10px 10px 4px;
+      background: #fff8e8;
+      color: #70561d;
+      font-size: 11px;
+      line-height: 1.72;
+      overflow-wrap: anywhere;
+    }
+    .entry-when b { color: #8a6114; }
+    .level-handoff {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 1px solid #f0dfb7;
+      border-radius: 12px;
+      background: #fffaf0;
+    }
+    .level-handoff .mini-avatar { flex: 0 0 auto; }
+    .level-handoff p {
+      margin: 0;
+      color: #725923;
+      font-size: 11px;
+      line-height: 1.7;
+    }
     .related-row { display: flex; flex-wrap: wrap; gap: 6px; }
     .related-chip {
       padding: 7px 9px;
@@ -9847,7 +10028,7 @@
     const CUSTOM_KEY = "ledgerquest.custom-content.v2";
     const LEGACY_CUSTOM_KEY = "ledgerquest.custom-content.v1";
     const CONTENT_SCHEMA_VERSION = 2;
-    const APP_VERSION = "v0.6.1";
+    const APP_VERSION = "v0.6.2";
     const PROGRESS_SYNC_SCHEMA = 1;
     const YOYO_EMOJI = "🧑🏻‍💼";
     const MODE_LABEL = {
@@ -9888,6 +10069,110 @@
       last: null
     });
 
+    const FEEDBACK3_TEACHING_PATCHES = {
+      "pc-p12-t02": {
+        human: "收入是边干边确认，还是交货那一刻确认，只看客户有没有在过程中持续拿到好处。先问三句：客户是不是边做边用、已经占到便宜？客户能不能控制你正在做的东西？这东西换给别人就没用，而且你能按已经做完的部分收款吗？三句里有一句是，就按进度确认；三句全是“不是”，就等客户拿到控制权时再确认。",
+        memory: "先问三句话：客户边做边受益吗？客户能控制在建的东西吗？东西不可替代、企业又能按已完成部分收款吗？任意一句“是”，按时段；全是“不是”，等交付时点。",
+        whenToUse: "什么时候写：题目让你确认收入时，先分时段法还是时点法；分录只记录真正确认收入的那一步。",
+        entryTitle: "时段法与时点法：收入到底在哪一步记",
+        entryNote: "这张卡重点考“什么时候确认”，不是背一张固定凭证；题目给了增值税，再另列销项税额。",
+        entryGroups: [
+          {
+            title: "① 时段法：边履约边确认收入",
+            note: "客户在施工或服务过程中持续受益、能控制在建商品，或商品不可替代且企业有合格收款权时，按履约进度确认。",
+            lines: [
+              {
+                side: "借",
+                account: "应收账款",
+                amount: "本期履约进度对应金额",
+                why: "已经按进度取得收款权利。"
+              },
+              {
+                side: "贷",
+                account: "主营业务收入",
+                amount: "本期履约进度对应金额",
+                why: "客户持续取得利益，收入随履约进度确认。"
+              }
+            ]
+          },
+          {
+            title: "② 时点法：交付并转移控制权时确认",
+            note: "标准化商品通常在客户签收并取得控制权时确认；没交付前，不能只因为开票或收到钱就确认收入。",
+            lines: [
+              {
+                side: "借",
+                account: "应收账款 / 银行存款",
+                amount: "合同价款",
+                why: "客户取得控制权，企业形成收款权或已经收到款。"
+              },
+              {
+                side: "贷",
+                account: "主营业务收入",
+                amount: "合同价款",
+                why: "控制权已经转移，收入在这一刻成立。"
+              }
+            ]
+          }
+        ]
+      },
+      "pc-p12-t03": {
+        human: "合同价会变、客户还可能退货，就别一上来把整笔钱都算收入。先把最可能留下的钱估出来，只确认以后大概率不会被冲回的部分；预计要退的货，收入和成本都要拆开。",
+        whenToUse: "什么时候写：销售发生、但价格会变或客户有退货权时，先按预计退货情况拆收入，再按商品成本拆出应收退货成本。",
+        entryTitle: "附退货条款：收入只记预计不会退的部分",
+        entryNote: "实际退货时，再冲减预计负债和应收退货成本，按实际退货数量调整；题目给了增值税，再另列销项税额。",
+        entryGroups: [
+          {
+            title: "① 销售时：先估计退货，收入别记满",
+            note: "客户有退货权时，按预计不会退回的部分确认收入；预计退回部分先挂退款义务。",
+            lines: [
+              {
+                side: "借",
+                account: "应收账款 / 银行存款",
+                amount: "合同总价",
+                why: "按合同应收或已经收到的总金额记账。"
+              },
+              {
+                side: "贷",
+                account: "主营业务收入",
+                amount: "预计不会退回部分",
+                why: "只确认大概率留得住的收入。"
+              },
+              {
+                side: "贷",
+                account: "预计负债—应付退货款",
+                amount: "预计退回部分",
+                why: "客户可能退货，先把退款义务挂起来。"
+              }
+            ]
+          },
+          {
+            title: "② 结转成本：退回部分先转应收退货成本",
+            note: "已售商品成本按预计不会退回部分进主营业务成本；预计退回部分转到应收退货成本，先不直接进当期成本。",
+            lines: [
+              {
+                side: "借",
+                account: "主营业务成本",
+                amount: "预计不会退回商品成本",
+                why: "这部分货基本确定卖出，成本转损益。"
+              },
+              {
+                side: "借",
+                account: "应收退货成本",
+                amount: "预计退回商品成本",
+                why: "可能退回来的货先挂资产，不直接进成本。"
+              },
+              {
+                side: "贷",
+                account: "库存商品",
+                amount: "全部已售商品成本",
+                why: "货已经发出，库存要转出。"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
     let progress = loadProgress();
     let view = {
       name: "home",
@@ -9916,7 +10201,8 @@
       syncPaste: "",
       syncNotice: null,
       syncBusy: false,
-      challenge: null
+      challenge: null,
+      chapterBoss: null
     };
 
     function safeRecord(value) {
@@ -10524,11 +10810,13 @@
 
     function teachingForConcept(concept) {
       const override = CONCEPT_TEACHING[concept.id] || {};
+      const feedbackPatch = FEEDBACK3_TEACHING_PATCHES[concept.id] || {};
+      const source = { ...override, ...feedbackPatch };
       const chapterEntry = CHAPTER_ENTRIES[`${concept.subjectId}:${concept.chapterId}`] || null;
-      const cardEntry = Array.isArray(override.entry) ? override.entry : [];
+      const cardEntry = Array.isArray(source.entry) ? source.entry : [];
       const conceptEntry = Array.isArray(concept.entry) ? concept.entry : [];
-      const rawGroups = Array.isArray(override.entryGroups)
-        ? override.entryGroups
+      const rawGroups = Array.isArray(source.entryGroups)
+        ? source.entryGroups
         : Array.isArray(concept.entryGroups)
           ? concept.entryGroups
           : [];
@@ -10544,33 +10832,34 @@
       const entryScope = entry.length ? "card" : "none";
       const keywords = asTextList(concept.keywords);
       const clean = (value) => stripTeachingLabel(value, concept.title);
-      const decisionHint = clean(override.ask || concept.howTo || "");
+      const decisionHint = clean(source.ask || concept.howTo || "");
       const keywordHintWords = keywords
         .slice(0, 3)
         .map((word) => String(word).replace(/（[^）]*）|\([^)]*\)/g, "").trim())
         .filter(Boolean);
       const keywordHint = keywordHintWords.length ? `先圈关键词：${keywordHintWords.join("、")}。` : "";
-      const accountingNote = clean(override.accountingNote || concept.accountingNote || (concept.subjectId === "practice"
+      const accountingNote = clean(source.accountingNote || concept.accountingNote || (concept.subjectId === "practice"
         ? `${keywordHint}${decisionHint ? `${decisionHint} ` : ""}这张卡先做判断，不硬套凭证；只有题目明确要求写分录时，才按业务找科目和借贷方向。`
         : "本科目不考会计分录，重点把判断流程和适用条件用对。"));
       return {
-        human: clean(override.human || concept.human || fallbackHuman(concept)),
-        analogy: clean(override.analogy || ""),
-        example: clean(override.example || concept.example || ""),
-        ask: clean(override.ask || concept.howTo || `题目出现「${keywords.slice(0, 3).join(" / ") || concept.title}」时，就在考这张卡。`),
-        numbers: clean(override.numbers || concept.formula || "先判断口径，这张卡不靠硬套公式。"),
-        memory: clean(override.memory || concept.trap || ""),
+        human: clean(source.human || concept.human || fallbackHuman(concept)),
+        analogy: clean(source.analogy || ""),
+        example: clean(source.example || concept.example || ""),
+        ask: clean(source.ask || concept.howTo || `题目出现「${keywords.slice(0, 3).join(" / ") || concept.title}」时，就在考这张卡。`),
+        numbers: clean(source.numbers || concept.formula || "先判断口径，这张卡不靠硬套公式。"),
+        memory: clean(source.memory || concept.trap || ""),
+        whenToUse: clean(source.whenToUse || ""),
         entry,
         entryGroups,
         entryScope,
         entryTitle: entry.length
-          ? clean(override.entryTitle || "这张卡的分录 / 会计处理")
-          : clean(override.entryTitle || "判断流程"),
+          ? clean(source.entryTitle || "这张卡的分录 / 会计处理")
+          : clean(source.entryTitle || "判断流程"),
         entryNote: entry.length
-          ? clean(override.entryNote || "金额按题干给。这里只写这张卡对应的业务，不再拿整章通用分录硬套。")
+          ? clean(source.entryNote || "金额按题干给。这里只写这张卡对应的业务，不再拿整章通用分录硬套。")
           : accountingNote,
         hasAccountingNote: !entry.length
-          && Boolean(override.accountingNote || concept.accountingNote)
+          && Boolean(source.accountingNote || concept.accountingNote)
           && accountingNote.length >= 36,
         chapterGuide: clean(chapterEntry?.note || ""),
         chapterEntry: chapterEntry ? {
@@ -10649,11 +10938,186 @@
       return CHAPTER_ENTRIES[`${subjectId}:${chapterId}`] || null;
     }
 
+    function shortTeachingText(value, maxLength = 116) {
+      const text = String(value || "").replace(/\s+/g, " ").trim();
+      if (text.length <= maxLength) return text;
+      const cut = Math.max(
+        text.lastIndexOf("；", maxLength),
+        text.lastIndexOf("。", maxLength),
+        text.lastIndexOf("，", maxLength)
+      );
+      const end = cut >= 42 ? cut : maxLength - 1;
+      return `${text.slice(0, end).replace(/[，、；：\s]+$/, "")}…`;
+    }
+
+    function chapterLearningSummary(subjectId, chapterId) {
+      const items = chapterConcepts(subjectId, chapterId).map((concept, index) => ({
+        concept,
+        index,
+        teach: teachingForConcept(concept)
+      }));
+      const ranked = [...items].sort((left, right) => (
+        (Number(right.concept.courseLevel) || 0) - (Number(left.concept.courseLevel) || 0)
+        || left.index - right.index
+      ));
+      const anchors = ranked.slice(0, 3);
+      const anchorNames = anchors.map((item) => `「${item.concept.title}」`);
+      const mainline = anchors.length
+        ? `这章别从第一页硬背到最后。${anchorNames.join("、")}是主线：题干先找业务、时点、金额口径，再决定是确认、计量、列报，还是写分录。`
+        : "这章先看清业务和目标，再按条件、时点、金额口径一步步判断；题干里的限定词通常比套公式更先决定答案。";
+      const confusions = [];
+      const seen = new Set();
+      const candidates = [...ranked, ...items];
+      for (const item of candidates) {
+        const raw = item.teach.memory
+          || asTextList(item.concept.traps)[0]
+          || item.concept.trap
+          || item.teach.ask;
+        const text = shortTeachingText(raw, 108);
+        const key = text.replace(/[，。；：、\s]/g, "");
+        if (!text || seen.has(key)) continue;
+        seen.add(key);
+        confusions.push({ title: item.concept.title, text });
+        if (confusions.length >= 3) break;
+      }
+      if (!confusions.length) {
+        confusions.push({
+          title: "先抓题眼",
+          text: "看到“通常、应当、除外、不得”先圈出来；它们经常比数字更早改变答案。"
+        });
+      }
+      const entryCount = items.filter((item) => item.teach.entry?.length).length;
+      const chapterEntry = chapterEntryGuide(subjectId, chapterId);
+      const entryLine = entryCount || chapterEntry?.entry?.length
+        ? `本章有 ${entryCount} 张卡带本题专属分录${chapterEntry?.entry?.length ? "，知识地图里另有一份整章总览" : ""}。写分录只做三步：业务有没有发生、科目对不对、借贷方向和金额能不能对上；整章总览只当字典，不要看到题就整块照抄。`
+        : "本章不靠硬套分录，先把适用条件、计算口径和时点分清楚；只有题目明确要求写分录时，才按对应业务落笔。";
+      return { mainline, confusions, entryLine, conceptCount: items.length };
+    }
+
+    function teachingHash(value) {
+      let hash = 2166136261;
+      const text = String(value || "");
+      for (let index = 0; index < text.length; index += 1) {
+        hash ^= text.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return hash >>> 0;
+    }
+
+    function bossDecisionText(concept) {
+      const teach = teachingForConcept(concept);
+      const raw = String(teach.ask || concept.howTo || "").replace(/\s+/g, " ").trim();
+      if (!raw) {
+        return `先抓「${asTextList(concept.keywords).slice(0, 3).join(" / ") || concept.title}」相关的条件、时点和金额口径。`;
+      }
+      if (raw.length <= 132) return raw;
+      const cut = Math.max(
+        raw.lastIndexOf("；", 128),
+        raw.lastIndexOf("。", 128),
+        raw.lastIndexOf("，", 128)
+      );
+      return `${raw.slice(0, cut >= 52 ? cut : 128).replace(/[，、；：\s]+$/, "")}…`;
+    }
+
+    function chapterBossPicks(concepts, count = 3) {
+      if (concepts.length <= count) return concepts.slice();
+      const picks = [];
+      for (let index = 0; index < count; index += 1) {
+        const pickIndex = Math.round(((index + 0.5) * concepts.length) / count - 0.5);
+        const concept = concepts[Math.max(0, Math.min(concepts.length - 1, pickIndex))];
+        if (concept && !picks.some((item) => item.id === concept.id)) picks.push(concept);
+      }
+      for (const concept of concepts) {
+        if (picks.length >= count) break;
+        if (!picks.some((item) => item.id === concept.id)) picks.push(concept);
+      }
+      return picks;
+    }
+
+    function buildChapterBoss(chapterId) {
+      const found = findChapter(chapterId);
+      if (!found) return null;
+      const { subject, chapter } = found;
+      const concepts = chapterConcepts(subject.id, chapter.id);
+      if (!concepts.length) return null;
+      const picks = chapterBossPicks(concepts, 3);
+      const steps = picks.map((concept, stepIndex) => {
+        const correctText = bossDecisionText(concept);
+        const candidates = [
+          ...concepts.filter((item) => item.id !== concept.id),
+          ...CONCEPTS.filter((item) => (
+            item.id !== concept.id
+            && item.subjectId === subject.id
+            && item.chapterId !== chapter.id
+          )),
+          ...CONCEPTS.filter((item) => item.id !== concept.id && item.subjectId !== subject.id)
+        ];
+        const offset = candidates.length
+          ? teachingHash(`${chapter.id}:${concept.id}:distractors`) % candidates.length
+          : 0;
+        const ordered = candidates.length
+          ? [...candidates.slice(offset), ...candidates.slice(0, offset)]
+          : [];
+        const distractors = [];
+        const seen = new Set([correctText]);
+        for (const candidate of ordered) {
+          const text = bossDecisionText(candidate);
+          if (!text || seen.has(text)) continue;
+          seen.add(text);
+          distractors.push(text);
+          if (distractors.length >= 3) break;
+        }
+        const fallbackDistractors = [
+          `先看和「${concept.title}」无关的那一项，不必核对业务条件。`,
+          "只凭科目名称就落笔，不核对金额、时点和借贷方向。",
+          "把整章所有分录一起照抄，题目问哪一步先不用管。"
+        ];
+        for (const fallback of fallbackDistractors) {
+          if (distractors.length >= 3) break;
+          if (!seen.has(fallback)) {
+            seen.add(fallback);
+            distractors.push(fallback);
+          }
+        }
+        const correctIndex = teachingHash(`${chapter.id}:${concept.id}:answer`) % 4;
+        const options = [];
+        let distractorIndex = 0;
+        for (let index = 0; index < 4; index += 1) {
+          options.push(index === correctIndex ? correctText : distractors[distractorIndex++]);
+        }
+        return {
+          conceptId: concept.id,
+          conceptTitle: concept.title,
+          correctText,
+          correctIndex,
+          options
+        };
+      });
+      return {
+        chapterId: chapter.id,
+        subjectId: subject.id,
+        chapterTitle: chapter.title,
+        steps,
+        step: 0,
+        selected: null,
+        feedback: null,
+        done: false
+      };
+    }
+
     function teachingEntryHTML(teach, context = {}) {
       if (teach.entry?.length || teach.entryGroups?.length) {
+        const entryScope = teach.entryScope === "chapter" ? "chapter" : "card";
+        const defaultWhen = entryScope === "chapter"
+          ? "先看题目是不是真的走到本章这类通用处理；能对上业务、金额和时点再用，别把整章分录照抄。"
+          : "题目明确让你写分录，而且业务正好对得上这张卡时，才按上面的科目和方向落笔；只问判断或金额时，先把口径说清。";
+        const whenToUse = String(teach.whenToUse || defaultWhen)
+          .replace(/^什么时候(?:写|用)(?:这些分录)?[：:]\s*/, "")
+          .trim();
         return `
-          <div class="teaching-entry">
-            <div class="teaching-entry-head"><b>${esc(teach.entryTitle)}</b><span>${teach.entryScope === "chapter" ? "整章总览" : "只跟这张卡的业务走"}</span></div>
+          <div class="teaching-entry" data-entry-scope="${entryScope}">
+            <div class="teaching-entry-head"><b>${esc(teach.entryTitle)}</b><span>${entryScope === "chapter" ? "整章通用 · 不是本题专属" : "本题专属"}</span></div>
+            <div class="entry-when"><b>什么时候用：</b>${termAnnotateHTML(whenToUse, context)}</div>
             ${teach.numbers ? `<div class="entry-math"><b>金额怎么来：</b>${termAnnotateHTML(teach.numbers, context)}</div>` : ""}
             ${Array.isArray(teach.entryGroups) && teach.entryGroups.length
               ? teach.entryGroups.map((group) => `
@@ -12267,8 +12731,12 @@
                     ${formulaLegendHTML(teach.numbers)}
                   </div>
                 </div>
+                <div class="level-handoff">
+                  <span class="mini-avatar npc">👩🏻‍💼</span>
+                  <p><b>王姐：</b>先别急着点选项，这张卡我已经摊开了。把“什么时候用、拿什么数字、判断顺序”看一遍；有分录的，再把借贷方向看明白。</p>
+                </div>
                 ${teach.entry.length || teach.hasAccountingNote ? `
-                  <details class="level-entry" ${q.mode === "journal" ? "open" : ""}>
+                  <details class="level-entry" open>
                     <summary><b>${esc(teach.entryTitle)}</b><span>${teach.entry.length ? "借贷方向、科目、金额，以及为什么这么记" : "为什么这张卡不单独编分录，以及做题先判断什么"}</span></summary>
                     ${teachingEntryHTML(teach, { subjectId: subject.id, chapterId: chapter.id, topicId: topic.id })}
                   </details>
@@ -12903,6 +13371,8 @@
         root.innerHTML = renderResetModal();
       } else if (modal.type === "chapter-complete") {
         root.innerHTML = renderChapterCompleteModal(modal.chapterId);
+      } else if (modal.type === "chapter-boss") {
+        root.innerHTML = renderChapterBossModal();
       } else {
         root.innerHTML = "";
       }
@@ -12947,7 +13417,7 @@
           </div>
           <div class="detail-section"><h3>题干里盯这些词</h3><div class="chip-row">${keywords.map((word) => `<span class="chip warm">${esc(word)}</span>`).join("")}</div></div>
           <div class="detail-section"><h3>题干怎么问、拿什么算</h3><div class="teach-grid"><div class="teach-tile"><small>题干怎么问</small><p>${termAnnotateHTML(teach.ask, conceptContext)}</p></div><div class="teach-tile"><small>拿什么数字</small><div class="formula">${rawTextHTML(localizeDisplayText(teach.numbers, { ...conceptContext, field: "formula" }))}</div></div></div></div>
-          ${teach.entry.length || teach.hasAccountingNote ? `<div class="detail-section"><h3>${teach.entry.length ? "分录 / 会计处理" : "判断流程 / 会计口径"}</h3>${teachingEntryHTML(teach, conceptContext)}</div>` : ""}
+          ${teach.entry.length || teach.hasAccountingNote ? `<div class="detail-section"><h3>${teach.entry.length ? "这张卡的专属分录" : "判断流程 / 会计口径"}</h3>${teachingEntryHTML(teach, conceptContext)}</div>` : ""}
           ${concept.example ? `<div class="detail-section"><h3>刚才那道题的数字长这样</h3><div class="example-box">${termAnnotateHTML(concept.example, conceptContext)}</div></div>` : ""}
           ${(teach.memory || concept.trap) ? `<div class="detail-section"><h3>最后记一句</h3><ul class="trap-list"><li>${termAnnotateHTML(teach.memory || concept.trap, conceptContext)}</li></ul></div>` : ""}
           <div class="feedback-actions challenge-actions" style="margin-top:22px">
@@ -13051,14 +13521,14 @@
           </div>
         </div>
         <div class="detail-section">
-          <h3>${teach.entry.length ? "分录怎么写" : "判断流程"}</h3>
+          <h3>${teach.entry.length ? "本题专属分录" : "判断流程"}</h3>
           ${teach.entry.length || teach.hasAccountingNote
             ? teachingEntryHTML(teach, conceptContext)
             : `<div class="entry-note empty-entry">${termAnnotateHTML(teach.entryNote || "本科目不考会计分录，重点看上面的判断流程。", conceptContext)}</div>`}
         </div>
         ${teach.chapterEntry?.entry?.length ? `
           <details class="syllabus-details chapter-entry-guide">
-            <summary>本章常见处理总览（不是这张卡的专属分录）</summary>
+            <summary>本章其他业务分录（不是这张卡的专属分录）</summary>
             <div style="padding:0 13px 13px">
               <div class="teaching-entry">
                 <div class="teaching-entry-head"><b>${esc(teach.chapterEntry.title)}</b><span>整章通用示例</span></div>
@@ -13143,14 +13613,14 @@
           </div>
         </div>
         <div class="detail-section">
-          <h3>${teach.entry.length ? "分录怎么写、为什么这么记" : "这类题的判断流程"}</h3>
+          <h3>${teach.entry.length ? "这道题的专属分录" : "这类题的判断流程"}</h3>
           ${teach.entry.length || teach.hasAccountingNote
             ? teachingEntryHTML(teach, topicContext)
             : `<div class="entry-note empty-entry">${termAnnotateHTML(teach.entryNote || "本科目不靠分录判断，重点是先认条件，再套计算或规则。", topicContext)}</div>`}
         </div>
         ${teach.chapterEntry?.entry?.length ? `
           <details class="syllabus-details chapter-entry-guide">
-            <summary>本章常见处理总览（不是这道题的专属分录）</summary>
+            <summary>本章其他业务分录（不是这道题的专属分录）</summary>
             <div style="padding:0 13px 13px">
               <div class="teaching-entry">
                 <div class="teaching-entry-head"><b>${esc(teach.chapterEntry.title)}</b><span>整章通用示例</span></div>
@@ -13206,13 +13676,17 @@
           <ol class="detail-steps">
             <li>先读剧情下面的“人话版”，知道这个知识点到底在解决什么问题。</li>
             <li>再看“题干怎么问”和“拿什么数字”，把题干翻译成一句能动手的话。</li>
-            <li>有分录的章节先看借贷方向和科目，再回题目作答。</li>
+            <li>知识卡默认摊开。有分录时先看“什么时候用”，再核对借贷方向、科目和金额，然后回题目作答。</li>
             <li>答对会补齐人话复盘；答错先给方向，第二次再拆步骤，仍可无限重试。</li>
           </ol>
         </div>
         <div class="detail-section">
           <h3>知识库怎么查</h3>
           <p>“概念速查”按科目、章节和类型筛选。选到某一章后，顶部会出现“本章知识地图”，把本章全部考点、分录/判断总览和微闯关入口放在一起。正文里的英文放在中文后面的括号里；公式保留字母时，会附“公式字母对照”。</p>
+        </div>
+        <div class="detail-section">
+          <h3>章末怎么收口</h3>
+          <p>一章剧情全部通过后，王姐会把本章主线、最容易混的地方和分录入口串成一张章节总结。接着可以接“王姐的大单子”，用三步会签把本章知识重新走一遍；答错可以原地重来。</p>
         </div>
         <div class="detail-section"><h3>学习档案</h3><p>会记录通关数、靠谱值、连击和踩坑知识点。重置进度只清空学习记录，不会删掉知识卡和关卡。</p></div>
         <div class="detail-section"><h3>扩展学习内容</h3><p>在知识库点“内容工坊”，可以导入自己整理的剧情关卡，也可以导出知识卡。导入前会先校验，不会破坏现有内容。</p></div>
@@ -13318,6 +13792,7 @@
       const { subject, chapter } = found;
       const next = nextChapterAfter(chapterId);
       const stats = chapterStats(chapter);
+      const summary = chapterLearningSummary(subject.id, chapter.id);
       const keywords = chapter.topics
         .flatMap((topic) => topic.keywords || [])
         .filter((word, index, array) => array.indexOf(word) === index)
@@ -13340,6 +13815,20 @@
           <b>${stats.total} 个剧情关不是本章的全部考点。</b>
           本章共收录 ${stats.conceptTotal} 张知识卡，剧情关只抽查 ${stats.total} 个任务；想覆盖整章，请从“本章知识地图”逐张查看和练习。
         </div>
+        <section class="chapter-summary">
+          <div class="chapter-summary-head">
+            <span class="mini-avatar npc">👩🏻‍💼</span>
+            <div>
+              <span class="eyebrow">王姐把工位让给你 · 看看这一章到底在考什么</span>
+              <h3>王姐的章节总结</h3>
+              <p>${esc(summary.mainline)}</p>
+            </div>
+          </div>
+          <ul class="chapter-summary-list">
+            ${summary.confusions.map((item) => `<li><b>${esc(item.title)}：</b>${esc(item.text)}</li>`).join("")}
+          </ul>
+          <div class="chapter-summary-entry">${esc(summary.entryLine)}</div>
+        </section>
         <div class="detail-section">
           <h3>带走这几张词卡</h3>
           <div class="chip-row">${keywords.map((word) => `<span class="chip warm">${esc(word)}</span>`).join("")}</div>
@@ -13351,11 +13840,112 @@
           </ol>
         </div>
         <div class="feedback-actions" style="margin-top:22px">
+          <button class="btn btn-primary btn-small" data-action="open-chapter-boss" data-chapter="${esc(chapter.id)}">接王姐的大单子 <span aria-hidden="true">→</span></button>
           <button class="btn btn-soft btn-small" data-action="open-chapter-library" data-subject="${esc(subject.id)}" data-chapter="${esc(chapter.id)}">查看本章全部 ${stats.conceptTotal} 个考点</button>
           ${next ? `<button class="btn btn-primary btn-small" data-action="open-next-chapter" data-chapter="${esc(next.chapter.id)}">下一章：${esc(next.chapter.title)} →</button>` : ""}
           <button class="btn btn-soft btn-small" data-action="nav-map">回闯关地图</button>
         </div>
       `, "剧情通关", "章节回顾");
+    }
+
+    function renderChapterBossModal() {
+      const boss = view.chapterBoss;
+      if (!boss) {
+        return modalShell(`<p class="muted">这张单子还没生成，请从章节总结重新进入。</p>`, "还没接单", "王姐在等");
+      }
+      const found = findChapter(boss.chapterId);
+      if (!found) {
+        return modalShell(`<p class="muted">这张单子对应的章节已经找不到了。</p>`, "没有找到", "出错了");
+      }
+      const { subject, chapter } = found;
+      const context = {
+        subjectId: subject.id,
+        chapterId: chapter.id
+      };
+      if (boss.done) {
+        return modalShell(`
+          <div class="chapter-pass">
+            <div class="boss-complete-seal">结<br>案</div>
+            <div>
+              <span class="eyebrow">${esc(subject.short)} · ${esc(chapter.title)}</span>
+              <h3>王姐的大单子结案</h3>
+              <p>三张单子都签对了。王姐把笔一放：“可以，今天这摊子交给你，我敢去开会了。”</p>
+            </div>
+          </div>
+          <div class="boss-summary-grid">
+            ${boss.steps.map((step, index) => {
+              const concept = CONCEPTS.find((item) => item.id === step.conceptId);
+              const teach = concept ? teachingForConcept(concept) : null;
+              return `
+                <div class="boss-summary-card">
+                  <b>${index + 1}. ${esc(step.conceptTitle)}</b>
+                  <p>${termAnnotateHTML(step.correctText, context)}</p>
+                  ${teach?.human ? `<p style="margin-top:5px"><b>人话：</b>${termAnnotateHTML(shortTeachingText(teach.human, 96), context)}</p>` : ""}
+                </div>
+              `;
+            }).join("")}
+          </div>
+          <div class="boss-brief" style="margin-top:13px">
+            <b>王姐的结案纸：</b>这三步不是三道孤立选择题，而是一单业务从“看条件”到“找金额”再到“落科目”的顺序。考试里题干一换数字，顺序不能乱。
+          </div>
+          <div class="feedback-actions" style="margin-top:20px">
+            <button class="btn btn-primary btn-small" data-action="open-chapter-boss" data-chapter="${esc(chapter.id)}">再走一遍三步会签</button>
+            <button class="btn btn-soft btn-small" data-action="open-chapter-library" data-subject="${esc(subject.id)}" data-chapter="${esc(chapter.id)}">回本章知识地图</button>
+            <button class="btn btn-soft btn-small" data-action="close-modal">收工</button>
+          </div>
+        `, "王姐的大单子 · 结案", "章节综合题");
+      }
+      const step = boss.steps[boss.step];
+      if (!step) return modalShell(`<p class="muted">单据状态已失效。</p>`, "单据丢了", "出错了");
+      const concept = CONCEPTS.find((item) => item.id === step.conceptId);
+      if (!concept) return modalShell(`<p class="muted">这张单据对应的知识点不存在。</p>`, "没有找到", "出错了");
+      const teach = teachingForConcept(concept);
+      const locked = Boolean(boss.feedback);
+      const feedback = boss.feedback;
+      return modalShell(`
+        <div class="boss-brief">
+          <b>王姐：</b>来个大单子，你全权负责。别慌，这单跨了几个环节，我把它拆成三张单据。每一张只问你一句：这一步先核对什么？
+        </div>
+        <div class="boss-progress-meta">
+          <span>第 ${boss.step + 1} / ${boss.steps.length} 张单据</span>
+          <span>${esc(chapter.title)} · 键盘 1-4 选择</span>
+        </div>
+        <div class="challenge-progress"><span style="width:${((boss.step + 1) / boss.steps.length) * 100}%"></span></div>
+        <section class="boss-sheet">
+          <span class="concept-kicker">${esc(concept.chapterId.toUpperCase())} · ${esc(concept.chapterTitle)}</span>
+          <h3>第 ${boss.step + 1} 张单子 · ${esc(concept.title)}</h3>
+          <p>王姐把单子推过来：“这一步先核对什么？选最该先看的那口。”</p>
+          <div class="boss-hint"><b>单据关键词：</b>${asTextList(concept.keywords).slice(0, 5).map((word) => `<span class="chip warm">${esc(word)}</span>`).join(" ") || "先看题干本身的业务和时点"}</div>
+        </section>
+        <div class="option-list boss-option-list">
+          ${step.options.map((option, index) => {
+            let className = "option-btn boss-option";
+            if (!locked && boss.selected === index) className += " selected";
+            if (locked && index === step.correctIndex) className += " correct";
+            if (locked && boss.selected === index && index !== step.correctIndex) className += " wrong";
+            return `
+              <button class="${className}" data-action="boss-pick" data-index="${index}" ${locked ? "disabled" : ""}>
+                <span class="option-key">${String.fromCharCode(65 + index)}</span>
+                <span>${termAnnotateHTML(option, context)}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+        ${feedback ? `
+          <div class="boss-result ${feedback.type}">
+            <b>${feedback.type === "correct" ? "王姐点头：这一步抓对了。" : "王姐把笔按住：先别签，这张单子还差一口气。"}</b>
+            ${feedback.type === "correct"
+              ? `<p><b>人话：</b>${termAnnotateHTML(teach.human, context)}</p><p><b>金额口径：</b>${termAnnotateHTML(teach.numbers, context)}</p>`
+              : `<p>${termAnnotateHTML(shortTeachingText(teach.memory || concept.trap || teach.human, 120), context)}</p><p>回到题干，先圈关键词，再选“最该先核对”的那一项。可以重来。</p>`}
+          </div>
+        ` : ""}
+        <div class="feedback-actions" style="margin-top:16px">
+          ${!feedback ? `<button class="btn btn-primary btn-small" data-action="boss-submit" ${boss.selected === null ? "disabled" : ""}>签这一张</button>` : ""}
+          ${feedback?.type === "wrong" ? `<button class="btn btn-coral btn-small" data-action="boss-retry">重新核对</button>` : ""}
+          ${feedback?.type === "correct" ? `<button class="btn btn-primary btn-small" data-action="boss-next">${boss.step + 1 >= boss.steps.length ? "三步都签完" : "签下一张"} →</button>` : ""}
+          <button class="btn btn-soft btn-small" data-action="close-modal">先放一下</button>
+        </div>
+      `, "王姐的大单子 · 三步会签", "章节综合题");
     }
 
     function render() {
@@ -13886,6 +14476,45 @@
         retryConceptChallenge();
       } else if (action === "challenge-next-concept") {
         startConceptChallenge(actionEl.dataset.concept);
+      } else if (action === "open-chapter-boss") {
+        const boss = buildChapterBoss(actionEl.dataset.chapter);
+        if (!boss) {
+          showToast("这一章还没有足够的知识点来拆单子。");
+          return;
+        }
+        view.chapterBoss = boss;
+        view.modal = { type: "chapter-boss" };
+        render();
+      } else if (action === "boss-pick") {
+        if (!view.chapterBoss || view.chapterBoss.feedback) return;
+        view.chapterBoss.selected = Number(actionEl.dataset.index);
+        render();
+      } else if (action === "boss-submit") {
+        const boss = view.chapterBoss;
+        if (!boss || boss.feedback || boss.selected === null) return;
+        boss.feedback = {
+          type: boss.selected === boss.steps[boss.step].correctIndex ? "correct" : "wrong"
+        };
+        render();
+      } else if (action === "boss-retry") {
+        if (!view.chapterBoss) return;
+        view.chapterBoss.feedback = null;
+        view.chapterBoss.selected = null;
+        render();
+      } else if (action === "boss-next") {
+        const boss = view.chapterBoss;
+        if (!boss || boss.feedback?.type !== "correct") return;
+        if (boss.step + 1 >= boss.steps.length) {
+          boss.done = true;
+          boss.feedback = null;
+          boss.selected = null;
+          burstConfetti();
+        } else {
+          boss.step += 1;
+          boss.feedback = null;
+          boss.selected = null;
+        }
+        render();
       } else if (action === "open-help") {
         view.modal = { type: "help" };
         render();
@@ -14029,6 +14658,43 @@
         } else if (event.key.toLowerCase() === "r" && view.challenge.feedback?.type === "wrong") {
           event.preventDefault();
           retryConceptChallenge();
+        }
+      }
+      if (view.modal?.type === "chapter-boss" && view.chapterBoss && !["INPUT", "TEXTAREA", "SELECT"].includes(event.target.tagName)) {
+        const boss = view.chapterBoss;
+        const step = boss.steps?.[boss.step];
+        const numeric = Number(event.key);
+        if (!boss.done && numeric >= 1 && numeric <= (step?.options.length || 0)) {
+          event.preventDefault();
+          if (!boss.feedback) {
+            boss.selected = numeric - 1;
+            render();
+          }
+        } else if (event.key === "Enter") {
+          event.preventDefault();
+          if (boss.done) return;
+          if (boss.feedback?.type === "wrong") {
+            boss.feedback = null;
+            boss.selected = null;
+            render();
+          } else if (boss.feedback?.type === "correct") {
+            if (boss.step + 1 >= boss.steps.length) {
+              boss.done = true;
+              boss.feedback = null;
+              boss.selected = null;
+              burstConfetti();
+            } else {
+              boss.step += 1;
+              boss.feedback = null;
+              boss.selected = null;
+            }
+            render();
+          } else if (boss.selected !== null) {
+            boss.feedback = {
+              type: boss.selected === step.correctIndex ? "correct" : "wrong"
+            };
+            render();
+          }
         }
       }
     });
