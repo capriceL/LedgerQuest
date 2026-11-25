@@ -9,6 +9,7 @@ const conceptFiles = [
 const glossaryFile = "work/glossary-v1.json";
 const syllabusFile = "work/syllabus-audit.json";
 const teachingFile = "work/concept-teaching-v1.json";
+const mothersFile = "work/exam-mothers-v1.json";
 
 const readJSON = (file) => JSON.parse(readFileSync(file, "utf8"));
 const readConcepts = (file) => {
@@ -80,6 +81,54 @@ for (const conceptId of Object.keys(teachingCards)) {
   if (!conceptIds.has(conceptId)) throw new Error(`讲义卡引用了不存在的概念：${conceptId}`);
 }
 
+if (!existsSync(mothersFile)) throw new Error(`缺少母题库：${mothersFile}`);
+const motherPayload = readJSON(mothersFile);
+const examMothers = motherPayload.cards && typeof motherPayload.cards === "object"
+  ? motherPayload.cards
+  : {};
+for (const concept of concepts) {
+  const card = examMothers[concept.id];
+  if (!card) throw new Error(`母题库缺少概念：${concept.id}`);
+  if (!card.mother || !card.variant) {
+    throw new Error(`母题库结构不完整：${concept.id}`);
+  }
+}
+
+const compactQuestion = (question) => {
+  const fields = [
+    "id",
+    "type",
+    "stem",
+    "options",
+    "answer",
+    "explanation",
+    "optionFeedback",
+    "sourceKind",
+    "goal",
+    "keywords",
+    "why",
+    "how",
+    "trap"
+  ];
+  return Object.fromEntries(
+    fields
+      .filter((field) => question[field] !== undefined && question[field] !== null)
+      .map((field) => [field, question[field]])
+  );
+};
+const embeddedExamMothers = Object.fromEntries(
+  concepts.map((concept) => {
+    const card = examMothers[concept.id];
+    return [
+      concept.id,
+      {
+        mother: compactQuestion(card.mother),
+        variant: compactQuestion(card.variant)
+      }
+    ];
+  })
+);
+
 const termIds = new Set();
 for (const term of glossary) {
   for (const field of ["id", "term", "full", "zh", "plain"]) {
@@ -96,10 +145,10 @@ if (!html.includes("/* @@CONCEPT_CONTENT_START@@ */") || !html.includes("/* @@CO
 }
 html = html.replace(
   /\/\* @@CONCEPT_CONTENT_START@@ \*\/[\s\S]*?\/\* @@CONCEPT_CONTENT_END@@ \*\//,
-  `/* @@CONCEPT_CONTENT_START@@ */\n    CONCEPTS.push(...${safeJSON(enrichedConcepts)});\n    GLOSSARY.push(...${safeJSON(glossary)});\n    Object.assign(CONCEPT_TEACHING, ${safeJSON(teachingCards)});\n    Object.assign(CHAPTER_ENTRIES, ${safeJSON(chapterEntries)});\n    SYLLABUS_META = ${safeJSON(syllabusMeta)};\n    /* @@CONCEPT_CONTENT_END@@ */`
+  `/* @@CONCEPT_CONTENT_START@@ */\n    CONCEPTS.push(...${safeJSON(enrichedConcepts)});\n    Object.assign(EXAM_MOTHERS, ${safeJSON(embeddedExamMothers)});\n    GLOSSARY.push(...${safeJSON(glossary)});\n    Object.assign(CONCEPT_TEACHING, ${safeJSON(teachingCards)});\n    Object.assign(CHAPTER_ENTRIES, ${safeJSON(chapterEntries)});\n    SYLLABUS_META = ${safeJSON(syllabusMeta)};\n    /* @@CONCEPT_CONTENT_END@@ */`
 );
 
 writeFileSync(htmlFile, html, "utf8");
 const chapters = new Set(concepts.map((item) => `${item.subjectId}:${item.chapterId}`));
 const linkedItems = [...syllabusRefsByConcept.values()].reduce((sum, refs) => sum + refs.length, 0);
-console.log(`Embedded ${concepts.length} concepts across ${chapters.size} chapters, ${glossary.length} glossary terms, ${Object.keys(teachingCards).length} teaching overrides, ${Object.keys(chapterEntries).length} chapter entry guides and ${linkedItems} syllabus links, ${Buffer.byteLength(html, "utf8")} bytes.`);
+console.log(`Embedded ${concepts.length} concepts, ${Object.keys(embeddedExamMothers).length} mother cards across ${chapters.size} chapters, ${glossary.length} glossary terms, ${Object.keys(teachingCards).length} teaching overrides, ${Object.keys(chapterEntries).length} chapter entry guides and ${linkedItems} syllabus links, ${Buffer.byteLength(html, "utf8")} bytes.`);

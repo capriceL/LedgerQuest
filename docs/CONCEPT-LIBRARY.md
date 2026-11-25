@@ -2,7 +2,7 @@
 
 ## 1. 定位
 
-概念速查库不是额外的可玩关卡，而是独立于剧情闯关的“学习索引层”：
+概念速查库不是第 95 个可玩关卡，而是独立于剧情闯关的“学习索引层”：
 
 - 剧情关卡回答“这一类题怎么一步步做”。
 - 概念卡回答“这个知识点是什么、怎么找关键词、拿什么数字算、最容易错在哪”。
@@ -15,11 +15,17 @@
 - `work/concepts-practice-v1.json`：538 张中级会计实务概念卡。
 - `work/concepts-law-v1.json`：305 张中级经济法概念卡。
 - `work/concepts-finance-v1.json`：206 张中级财务管理概念卡。
-- `work/concept-teaching-v1.json`：177 张卡片级分录基础源、17 张判断型专属口径、26 个实务分录入口；公开渲染版包含 v0.6.2 的两张重点卡补丁，最终为 179 张卡片级分录。
+- `work/concept-teaching-v1.json`：177 张卡片级分录基础源、17 张判断型专属口径、26 个实务分录入口；加 v0.6.2 的 2 张反馈补丁后，最终渲染为 179 张卡片级分录。
 - `work/glossary-v1.json`：125 个英文缩写、全称、中文名和行业解释。
 - `work/syllabus-audit.json`：2026 官方大纲 42 章、449 个编号知识点的映射与缺口审计。
+- `work/concept-audit.json`：概念字段、ID、关联和章节密度审计。
+- `work/exam-mothers-v1.json`：1,049 道母题和 1,049 道同卡变式的运行时数据源。
+- `work/exam-mothers-audit.json`：2,098 道题的题干、选项、答案、解析、反馈和重复性审计。
+- `work/challenge-audit.json`：1,049 张卡成功生成 2,098 道母题/变式题的运行时可生成性审计。
+- `work/teaching-audit.json`：全库人话、题干口径、数字口径、分录入口和逐行原因审计。
+- `work/formula-audit-v3.json`：98 项关键公式与业务口径回归。
 
-当前汇总：1,049 张概念卡、45 个学习区块、125 个术语、449/449 官方条目、3,147 道微闯关题、179 张卡片级分录、17 张判断型专属口径。审计结果由 `tools/` 中的脚本现场生成。
+当前汇总：1,049 张概念卡、45 个学习区块、125 个术语、449/449 官方条目、2,098 道母题/变式题、179 张卡片级分录、17 张判断型专属口径。v0.7.0 教学变化见 `docs/TEACHING-QUALITY-v0.7.0.md`。
 
 ## 3. 概念卡结构
 
@@ -51,7 +57,7 @@
 2. `title`、`aliases`、`keywords` 要包含可搜索的考试叫法。
 3. `plain` 不能只写“很重要，需要掌握”；要说人话。
 4. `howTo` 必须能让用户知道“题目想干什么、先找什么、拿什么判断”。
-5. 经济法期限、比例和程序通过产品内容审计交叉核验；正式用途仍以最新官方法规文本为准。
+5. 经济法期限、比例、程序以考试范围与自动语义门禁交叉核验；正式用途仍以最新官方法规文本为准。
 6. 概念卡与大纲条目是映射关系；通过门禁不等于教材逐句或外部教师签字已核定。
 
 ## 3.1 统一教学层
@@ -66,7 +72,7 @@
 6. 顺手记一个例子：短场景或带数字的例子。
 7. 最容易翻车：只讲一个坑。
 
-人工讲义优先覆盖复杂/易错点；其余卡片也必须经过同一套字段清洗，不允许把长句、重复卡名标签或旧模板直接丢给用户。
+人工讲义优先覆盖复杂/易错点；未人工重写的卡片也必须经过同一套字段清洗，不允许把教材长句、重复卡名标签或旧模板直接丢给用户。
 
 ## 4. 术语显示策略
 
@@ -94,15 +100,23 @@
 
 ## 5. 构建流程
 
-当前主文件已是 v0.6.2 封存产物。除非明确执行完整版本升级，否则不得为“检查”而重跑内容生成或嵌入脚本；日常验收只跑审计与测试。内容源确实更新后，才按下例执行完整重建：
+当前主文件已是 v0.7.0 封存产物。除非明确执行完整版本升级，否则不得为“检查”而重跑内容生成或嵌入脚本；日常验收只跑审计与测试。内容源确实更新后，才按下例执行完整重建：
 
 ```powershell
-node tools\embed-content.mjs
-node tools\embed-concepts.mjs
+node tools\build-syllabus-audit.mjs
+node tools\check-syllabus-coverage.mjs
+node tools\build-extended-law-audit.mjs
+node tools\check-extended-law-coverage.mjs
+node tools\build-extended-audit-pf.mjs
+node tools\check-extended-pf-coverage.mjs
+node tools\apply-teaching-v2.mjs
 node tools\audit-concepts.mjs
-node tools\audit-challenges.mjs
 node tools\audit-teaching.mjs LedgerQuest.html
 node tools\audit-formulas-v3.mjs
+python tools\build-exam-mothers-v1.py
+node tools\audit-exam-mothers.mjs
+node tools\audit-challenges.mjs
+node tools\embed-concepts.mjs
 node tools\check-html.mjs LedgerQuest.html
 node tools\smoke-runtime.mjs LedgerQuest.html
 node tools\test-engine.mjs LedgerQuest.html
@@ -114,7 +128,7 @@ node tools\edge-smoke.mjs
 ## 6. 界面行为
 
 - 概念速查：关键词搜索 + 科目 + 章节 + 类型筛选；每批加载 60 张。
-- 概念详卡：先人话，再关键词、题干怎么问、拿什么数字、分录/会计处理、例子、易错点；概念原话折叠在底部。
+- 概念详卡：先人话，再关键词、题干怎么问、拿什么数字、分录/会计处理、例子、易错点；教材原话折叠在底部。
 - 章节知识地图：明确显示“本章全部 N 个考点”，附类型分布和章级分录总览，不做重点抽样。
 - 知识库栏目：仅“概念速查”与“闯关知识卡”，不单列英文术语。
 - 正文术语：统一中文优先、英文括号补注；只渲染转义后的文本，不执行导入内容中的 HTML。
@@ -123,6 +137,9 @@ node tools\edge-smoke.mjs
 ## 7. 验收边界
 
 - 大纲映射通过仅表示“449 个官方编号条目能找到对应概念卡”。
+- 扩展门禁通过仅表示 1,270 个官方/机构条目都能在标题、别名或关键词中严格落项；正文提到不算覆盖。
 - 教学门禁通过表示 1,049 张卡都有短句人话、题干识别口径、数字/判断口径；179 张卡片级分录和 17 张判断型专属口径通过结构审计，实务 26/26 学习区块有分录入口，逐行借贷/科目/金额/原因齐全。
+- 母题门禁通过表示 1,049 张卡均有两道题、题干与选项非空、答案合法、单/多选/判断类型正确、解析含“为什么”和“怎么做”、母题与变式不重复、派生干扰项未盗用其他卡的真实规则。
+- 公开版本保留 1,049 张卡和 2,098 道母题/变式题；内部源头字段已从公开仓库移除。
 - 正式用途仍需以 2026 出版社教材、最新法规和外部专业教师意见为准；自动门禁不冒充这些证据。
 - 任何内容代理输出的条数、重复 ID、断链和映射缺口都由主代理重新核验，不接受“agent 已完成”作为证据。

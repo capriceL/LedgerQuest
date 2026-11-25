@@ -25,6 +25,7 @@ node tools\test-sync.mjs LedgerQuest.html
 ```powershell
 node tools\audit-concepts.mjs
 node tools\audit-challenges.mjs
+node tools\audit-exam-mothers.mjs
 node tools\audit-teaching.mjs LedgerQuest.html
 node tools\audit-formulas-v3.mjs
 node tools\audit-copy-integrity.mjs

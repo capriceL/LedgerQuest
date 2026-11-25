@@ -1,3 +1,5 @@
+import "./audit-challenges-v2.mjs";
+process.exit(process.exitCode || 0);
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const files = [

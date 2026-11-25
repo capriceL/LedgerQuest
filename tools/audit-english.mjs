@@ -125,9 +125,11 @@ data.concepts.forEach((concept) => {
   ["aliases", "keywords"].forEach((field) => pushArray("concept", concept.id, field, concept[field], {
     searchMetadata: true
   }));
-  (Array.isArray(concept.examNotes) ? concept.examNotes : []).forEach((note, index) => {
-    push("exam-note", concept.id, `examNotes[${index}].label`, note.label, { field: "label" });
-    push("exam-note", concept.id, `examNotes[${index}].text`, note.text, { field: "text" });
+  const notes = Array.isArray(concept.examNotes) ? concept.examNotes : concept.courseNotes;
+  (Array.isArray(notes) ? notes : []).forEach((note, index) => {
+    const prefix = Array.isArray(concept.examNotes) ? "examNotes" : "courseNotes";
+    push("exam-note", concept.id, `${prefix}[${index}].label`, note.label, { field: "label" });
+    push("exam-note", concept.id, `${prefix}[${index}].text`, note.text, { field: "text" });
   });
 });
 

@@ -205,7 +205,7 @@ const report = {
   sources: [
     "2026 中级会计实务/财务管理/经济法考试大纲",
     "2026 中级会计教材常用公式口径",
-    "产品内置知识卡与教学字段"
+    "公开章节知识点与公式目录"
   ]
 };
 writeFileSync("work/formula-audit-v3.json", `${JSON.stringify(report, null, 2)}\n`, "utf8");

@@ -18,7 +18,7 @@ SUBJECTS = {
 }
 
 NOISE_PATTERNS = {
-    "ads": re.compile(r"精讲班\s*[-—]|微信号|扫码"),
+    "ads": re.compile(r"培训广告|课程咨询|微信号|扫码|精讲班\s*[-—]"),
     "page_header": re.compile(r"第\s*[一二三四五六七八九十0-9]+\s*章\s*\|\s*精讲班"),
     "answer_material": re.compile(r"【答案】|【解析】|参考答案|答案解析"),
     "figure_label": re.compile(r"\[(?:图示|票样|表格|图片|略)\]"),
@@ -27,13 +27,13 @@ NOISE_PATTERNS = {
 }
 GENERIC_TEMPLATES = (
     "这部分不是让你背一整页",
-    "材料里的关键结论是",
+    "课程里的关键结论是",
     "先认清主体和场景",
     "这部分主要考查",
     "熟悉相关概念和应用",
     "掌握相关内容即可",
 )
-EXAM_NOTE_TEMPLATES = (
+COURSE_NOTE_TEMPLATES = (
     "本题只抓",
     "先圈主体",
     "别和同卡",
@@ -268,7 +268,8 @@ def main() -> int:
                     "legacySections",
                     "交付数据仍含原始讲义长文",
                 )
-            notes = card.get("examNotes")
+            notes_key = "courseNotes" if isinstance(card.get("courseNotes"), list) else "examNotes"
+            notes = card.get(notes_key)
             if isinstance(notes, list):
                 seen_notes: set[str] = set()
                 for note_index, note in enumerate(notes, start=1):
@@ -276,9 +277,9 @@ def main() -> int:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_shape",
+                            "course_note_shape",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条不是对象",
                         )
                         continue
@@ -289,24 +290,24 @@ def main() -> int:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_label",
+                            "course_note_label",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条标签长度异常",
                         )
                     if not 20 <= compact_len(note_text) <= 340:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_len",
+                            "course_note_len",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条正文 {compact_len(note_text)} 字",
                         )
                     template = next(
                         (
                             value
-                            for value in EXAM_NOTE_TEMPLATES
+                            for value in COURSE_NOTE_TEMPLATES
                             if value in note_text
                         ),
                         "",
@@ -315,9 +316,9 @@ def main() -> int:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_template",
+                            "course_note_template",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条含模板尾巴：{template}",
                         )
                     table_reference = TABLE_REFERENCE.search(note_text)
@@ -325,9 +326,9 @@ def main() -> int:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_table_reference",
+                            "course_note_table_reference",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条指向未呈现的表图：{table_reference.group(0)}",
                         )
                     broken = BROKEN_FRAGMENT.search(note_text)
@@ -335,22 +336,22 @@ def main() -> int:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_broken_fragment",
+                            "course_note_broken_fragment",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条含残句：{broken.group(0)}",
                         )
                     if note_text in seen_notes:
                         add_issue(
                             issues,
                             "error",
-                            "exam_note_duplicate",
+                            "course_note_duplicate",
                             card,
-                            "examNotes",
+                            notes_key,
                             f"第 {note_index} 条与同卡内容重复",
                         )
                     seen_notes.add(note_text)
-                    check_copy(card, f"examNotes[{note_index}]", note_text, issues)
+                    check_copy(card, f"{notes_key}[{note_index}]", note_text, issues)
             plain = str(card.get("plain") or "").strip()
             if compact_len(plain) >= 30:
                 global_plain[plain].append(card.get("id", ""))
@@ -358,7 +359,7 @@ def main() -> int:
         report["subjects"][subject] = {
             "concepts": len(concepts),
             "sectionItems": section_count,
-            "examNotes": note_count,
+            "courseNotes": note_count,
             "errors": sum(item["severity"] == "error" for item in issues),
             "warnings": sum(item["severity"] == "warning" for item in issues),
             "byCode": dict(sorted(Counter(item["code"] for item in issues).items())),

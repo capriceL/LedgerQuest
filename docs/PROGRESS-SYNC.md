@@ -1,6 +1,6 @@
 # 学习记录同步
 
-> 当前版本：`v0.6.2`  
+> 当前版本：`v0.7.0`  
 > 能力范围：单文件离线版内的手动跨设备迁移  
 > 不包含：云账号、服务器实时同步、多人同步
 
@@ -32,7 +32,7 @@ LQ1U.<8位校验码>.<base64url内容>
   "app": "LedgerQuest",
   "type": "progress-sync",
   "schema": 1,
-  "appVersion": "v0.6.2",
+  "appVersion": "v0.7.0",
   "exportedAt": "ISO 时间",
   "progress": {}
 }
@@ -99,7 +99,8 @@ node tools\edge-smoke.mjs
 - 最终同步测试：压缩同步码约 450–465 字符，原始码 828 字符，批量码约 5,030 字符，JSON 备份 46,556 字符。
 - 双端合并、空导入、重复导入、压缩/未压缩往返、备份 JSON、损坏同步码拒绝均通过。
 - Edge 390px 完成真实生成与导入；本机独有记录和远端记录同时保留。
-- 公开脱敏主文件：4,153,307 bytes；SHA256 `C8E82AB9BDC695935094D96BA8B942D8B98BCA69DB4E473B85B1037E6A060B10`。
+- 封存主文件：4,188,745 bytes；SHA256 `C69B3C70A837B3385EA64FAA24B28C736CF5DB31D4E6B0B2802DA124BD4D4C97`。
+- 主文件、`releases/LedgerQuest.html`、`work/standalone-check/LedgerQuest.html`、`work/release-history/LedgerQuest-snapshot-15.html` 哈希一致。
 
 ## 8. 多设备方案边界
 

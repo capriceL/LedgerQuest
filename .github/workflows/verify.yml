@@ -24,6 +24,7 @@ jobs:
         run: |
           node tools/audit-concepts.mjs
           node tools/audit-challenges.mjs
+          node tools/audit-exam-mothers.mjs
           node tools/check-syllabus-coverage.mjs
       - name: Teaching and copy audits
         run: |

@@ -93,6 +93,76 @@ vm.runInContext(`
     const missing = expected.filter((phrase) => !text.includes(phrase));
     return missing.length ? [id + ": missing " + missing.join(" / ")] : [];
   });
+  const feedback3Teaching = {
+    timing: (() => {
+      const concept = CONCEPTS.find((item) => item.id === "pc-p12-t02");
+      if (!concept) return { ok: false, issues: ["missing pc-p12-t02"] };
+      const teach = teachingForConcept(concept);
+      const issues = [];
+      if (!teach.whenToUse.includes("题目让你确认收入")) issues.push("missing whenToUse");
+      if (!teach.entryGroups.length) issues.push("missing entryGroups");
+      if (!teach.memory.includes("客户边做边受益")) issues.push("memory is still compressed");
+      if (!teach.human.includes("先问三句")) issues.push("human explanation is still unclear");
+      return { ok: issues.length === 0, issues };
+    })(),
+    returns: (() => {
+      const concept = CONCEPTS.find((item) => item.id === "pc-p12-t03");
+      if (!concept) return { ok: false, issues: ["missing pc-p12-t03"] };
+      const teach = teachingForConcept(concept);
+      const text = teach.entryGroups.flatMap((group) => group.lines.map((line) => [line.account, line.amount, line.why].join(" "))).join(" ");
+      const issues = [];
+      if (!teach.whenToUse.includes("预计退货")) issues.push("missing whenToUse");
+      if (!text.includes("预计负债—应付退货款")) issues.push("missing refund liability");
+      if (!text.includes("应收退货成本")) issues.push("missing return cost asset");
+      return { ok: issues.length === 0, issues };
+    })()
+  };
+  const chapterBossFailures = SUBJECTS.flatMap((subject) => subject.chapters.map((chapter) => {
+    const boss = buildChapterBoss(chapter.id);
+    if (!boss) return [subject.id + ":" + chapter.id + ": missing boss"];
+    const problems = [];
+    if (boss.steps.length !== 3) problems.push("steps=" + boss.steps.length);
+    boss.steps.forEach((step) => {
+      if (step.options.length !== 4) problems.push("options=" + step.options.length);
+      if (new Set(step.options).size !== 4) problems.push("duplicate options");
+      if (step.correctIndex < 0 || step.correctIndex > 3) problems.push("bad answer index");
+      if (!CONCEPTS.some((concept) => concept.id === step.conceptId)) problems.push("missing concept " + step.conceptId);
+    });
+    return problems.length ? [subject.id + ":" + chapter.id + ": " + problems.join(", ")] : [];
+  })).flat();
+  const chapterSummaryFailures = SUBJECTS.flatMap((subject) => subject.chapters.map((chapter) => {
+    const summary = chapterLearningSummary(subject.id, chapter.id);
+    const problems = [];
+    if (summary.conceptCount < 3) problems.push("concepts=" + summary.conceptCount);
+    if (summary.mainline.length < 30) problems.push("mainline too short");
+    if (summary.confusions.length < 2) problems.push("confusions=" + summary.confusions.length);
+    if (summary.entryLine.length < 24) problems.push("entry line too short");
+    return problems.length ? [subject.id + ":" + chapter.id + ": " + problems.join(", ")] : [];
+  })).flat();
+  const motherQuestionFailures = CONCEPTS.flatMap((concept) => {
+    const questions = buildConceptChallenge(concept);
+    if (questions.length !== 2) return [concept.id + ": questions=" + questions.length];
+    const problems = [];
+    questions.forEach((question, index) => {
+      const answer = questionAnswerIndexes(question);
+      if (!question.stem) problems.push("stem");
+      if (!Array.isArray(question.options) || !question.options.length) problems.push("options");
+      if (!answer.length) problems.push("answer");
+      if (answer.some((value) => value < 0 || value >= (question.options || []).length)) problems.push("answer-range");
+      if (question.type === "judge" && question.options.length !== 2) problems.push("judge-options");
+      if (question.type !== "judge" && question.options.length !== 4) problems.push("choice-options");
+      if (!question.why || !question.how || !question.explanation) problems.push("explanation");
+      if (!Array.isArray(question.optionFeedback) || question.optionFeedback.length !== question.options.length) problems.push("feedback");
+      if (question.stage !== (index === 0 ? "mother" : "variant")) problems.push("stage");
+    });
+    return problems.length ? [concept.id + ": " + problems.join(", ")] : [];
+  });
+  const motherSourceCounts = CONCEPTS.reduce((acc, concept) => {
+    const question = EXAM_MOTHERS[concept.id]?.mother;
+    const key = question?.sourceKind || "(empty)";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
   globalThis.__testReport = {
     subjects: SUBJECTS.map((subject) => ({
       id: subject.id,
@@ -106,7 +176,16 @@ vm.runInContext(`
     content: {
       concepts: CONCEPTS.length,
       glossary: GLOSSARY.length,
-      keyConceptFailures
+      keyConceptFailures,
+      feedback3Teaching,
+      chapterBossFailures,
+      chapterSummaryFailures,
+      mothers: {
+        cards: Object.keys(EXAM_MOTHERS).length,
+        questions: CONCEPTS.length * 2,
+        sourceKinds: motherSourceCounts,
+        failures: motherQuestionFailures
+      }
     },
     validation: validateContent(SUBJECTS),
     view: view.name,
@@ -118,4 +197,10 @@ if (
   !context.__testReport.validation.ok
   || !context.__testReport.appHasContent
   || context.__testReport.content.keyConceptFailures.length
+  || !context.__testReport.content.feedback3Teaching.timing.ok
+  || !context.__testReport.content.feedback3Teaching.returns.ok
+  || context.__testReport.content.chapterBossFailures.length
+  || context.__testReport.content.chapterSummaryFailures.length
+  || context.__testReport.content.mothers.cards !== 1049
+  || context.__testReport.content.mothers.failures.length
 ) process.exitCode = 1;

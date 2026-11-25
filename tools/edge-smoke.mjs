@@ -1,25 +1,14 @@
 import { spawn } from "node:child_process";
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import path from "node:path";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
-import { pathToFileURL } from "node:url";
 
-const edgeCandidates = [
-  process.env.EDGE_PATH,
-  process.env.ProgramFiles && path.join(process.env.ProgramFiles, "Microsoft", "Edge", "Application", "msedge.exe"),
-  process.env["ProgramFiles(x86)"] && path.join(process.env["ProgramFiles(x86)"], "Microsoft", "Edge", "Application", "msedge.exe"),
-  process.env.LOCALAPPDATA && path.join(process.env.LOCALAPPDATA, "Microsoft", "Edge", "Application", "msedge.exe"),
-  "/usr/bin/microsoft-edge",
-  "/usr/bin/microsoft-edge-stable",
-  "/usr/bin/google-chrome"
-].filter(Boolean);
-const edge = edgeCandidates.find((candidate) => existsSync(candidate));
-if (!edge) {
-  throw new Error("未找到 Chromium 浏览器；请通过 EDGE_PATH 指定可执行文件。");
-}
+const edge = "C:\\Progra~2\\Microsoft\\Edge\\Application\\msedge.exe";
 const port = 9333;
-const profile = path.join(process.cwd(), "work", "edge-cdp-profile");
-const pageUrl = pathToFileURL(path.resolve("LedgerQuest.html")).href;
+const profile = "E:\\MY_Project\\LedgerQuest\\work\\edge-cdp-profile";
+const pageUrl =
+  process.argv[2]
+  || process.env.LEDGERQUEST_URL
+  || "file:///E:/MY_Project/LedgerQuest/LedgerQuest.html";
 mkdirSync(profile, { recursive: true });
 
 const child = spawn(edge, [
@@ -99,7 +88,34 @@ const screenshot = async (path) => {
 
 const navigate = async () => {
   await call("Page.navigate", { url: pageUrl });
-  await sleep(700);
+  const timeoutMs = Number(process.env.LEDGERQUEST_NAV_TIMEOUT_MS || 60000);
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    try {
+      const state = await evaluate(`(() => ({
+        readyState: document.readyState,
+        protocol: location.protocol,
+        title: document.title,
+        hasHome: Boolean(document.querySelector(".subject-card")),
+        errorPage: /^(chrome-error|edge-error):/.test(location.protocol)
+      }))()`);
+      if (state.hasHome) {
+        await sleep(300);
+        return;
+      }
+      if (state.errorPage) {
+        throw new Error(`Navigation failed for ${pageUrl}`);
+      }
+    } catch (error) {
+      if (/Access is denied|Execution context was destroyed|Cannot find context/i.test(String(error))) {
+        // The document is still being replaced; wait for the next polling pass.
+      } else {
+        throw error;
+      }
+    }
+    await sleep(300);
+  }
+  throw new Error(`Timed out waiting for the app home to render: ${pageUrl}`);
 };
 
 const results = {};
@@ -405,11 +421,28 @@ try {
     const bad = [];
     for (const concept of CONCEPTS) {
       const questions = buildConceptChallenge(concept);
-      if (questions.length < 3 || questions.some((question) => (
-        question.options.length !== 4
-        || question.answer < 0
+      if (questions.length !== 2 || questions.some((question) => (
+        !question.stem
+        || !Array.isArray(question.answer)
+        || question.answer.length < 1
+        || (!["single", "multi", "judge"].includes(question.type))
+        || (question.type === "judge" ? question.options.length !== 2 : question.options.length !== 4)
+        || question.answer.some((index) => index < 0 || index >= question.options.length)
         || question.options.some((option) => !String(option || "").trim())
+        || !question.why
+        || !question.how
+        || !question.explanation
       ))) {
+        bad.push(concept.id);
+      }
+    }
+    return { concepts: CONCEPTS.length, questions: CONCEPTS.length * 2, bad: bad.slice(0, 10), badCount: bad.length };
+  })()`);
+  results.challengeStepsAudit = await evaluate(`(() => {
+    const bad = [];
+    for (const concept of CONCEPTS) {
+      const steps = challengeHowSteps(teachingForConcept(concept));
+      if (steps.length < 2 || steps.some((step) => !String(step || "").trim())) {
         bad.push(concept.id);
       }
     }
@@ -428,11 +461,22 @@ try {
     hasButton: Boolean(document.querySelector('[data-action="start-concept-challenge"]'))
   }))()`);
   await evaluate(`document.querySelector('[data-action="start-concept-challenge"]').click()`);
+  results.challengeKnowledge = await evaluate(`(() => ({
+    title: document.querySelector(".modal-head h2")?.textContent,
+    hasHuman: Boolean(document.querySelector(".challenge-knowledge .teach-human")),
+    hasDemo: Boolean(document.querySelector(".challenge-demo")),
+    hasSteps: document.querySelectorAll(".challenge-step-list li").length,
+    hasEntry: Boolean(document.querySelector(".challenge-extra")),
+    hasStart: Boolean(document.querySelector('[data-action="challenge-start"]')),
+    hasOptions: Boolean(document.querySelector(".option-list"))
+  }))()`);
+  await screenshot("work/edge-challenge-knowledge.png");
+  await evaluate(`document.querySelector('[data-action="challenge-start"]').click()`);
   results.challengeStart = await evaluate(`(() => ({
     title: document.querySelector(".challenge-concept h3")?.textContent,
     progress: document.querySelector(".challenge-top")?.textContent.replace(/\\s+/g, " ").trim(),
     keywordCheat: document.querySelector(".challenge-cheat")?.textContent.replace(/\\s+/g, " ").trim(),
-    goal: document.querySelector(".challenge-question p")?.textContent.trim(),
+    goal: document.querySelector(".challenge-cheat span:nth-child(2) b")?.textContent.trim(),
     options: document.querySelectorAll(".challenge-question + .option-list .option-btn").length,
     submitDisabled: document.querySelector('[data-action="challenge-submit"]')?.disabled
   }))()`);
@@ -448,7 +492,7 @@ try {
   await evaluate(`(() => {
     const answer = view.challenge.questions[view.challenge.step].answer;
     const wrong = [...document.querySelectorAll(".challenge-question + .option-list .option-btn")]
-      .find((node, index) => index !== answer);
+      .find((node, index) => !answer.includes(index));
     wrong.click();
     document.querySelector('[data-action="challenge-submit"]').click();
   })()`);
@@ -469,7 +513,9 @@ try {
     while (!view.challenge.done) {
       const state = view.challenge;
       const question = state.questions[state.step];
-      document.querySelectorAll(".challenge-question + .option-list .option-btn")[question.answer].click();
+      for (const answerIndex of question.answer) {
+        document.querySelectorAll(".challenge-question + .option-list .option-btn")[answerIndex].click();
+      }
       document.querySelector('[data-action="challenge-submit"]').click();
       if (!view.challenge.done) document.querySelector('[data-action="challenge-next"]').click();
     }
@@ -483,7 +529,9 @@ try {
       hasExample: Boolean(document.querySelector(".modal .example-box")),
       cleared: Boolean(saved.conceptClears?.["law-e06-ext-01"]),
       nextButton: document.querySelector('[data-action="challenge-next-concept"]')?.textContent.trim(),
-      message: document.querySelector(".challenge-complete p")?.textContent.trim()
+      message: document.querySelector(".challenge-complete p")?.textContent.trim(),
+      hasRecap: document.querySelectorAll(".challenge-recap-item").length === 2,
+      routeDone: document.querySelectorAll(".challenge-route-step.done").length === 3
     };
   })()`);
   await screenshot("work/edge-challenge-complete.png");
@@ -508,6 +556,55 @@ try {
   }))()`);
   await screenshot("work/edge-challenge-complete-mobile.png");
   await metrics(1440, 1100);
+  await evaluate(`document.querySelector(".modal-close").click()`);
+
+  await evaluate(`startConceptChallenge("pc-p03-c02")`);
+  await evaluate(`document.querySelector('[data-action="challenge-start"]').click()`);
+  results.multiToggle = await evaluate(`(() => {
+    document.querySelectorAll(".challenge-question + .option-list .option-btn")[0].click();
+    document.querySelectorAll(".challenge-question + .option-list .option-btn")[1].click();
+    document.querySelectorAll(".challenge-question + .option-list .option-btn")[0].click();
+    return {
+      type: view.challenge.questions[0].type,
+      selected: [...view.challenge.selected],
+      submitDisabled: document.querySelector('[data-action="challenge-submit"]')?.disabled
+    };
+  })()`);
+  await evaluate(`document.querySelector('[data-action="challenge-submit"]').click()`);
+  results.multiMissing = await evaluate(`(() => ({
+    wrong: Boolean(document.querySelector(".challenge-question ~ .feedback.wrong")),
+    retry: Boolean(document.querySelector('[data-action="challenge-retry"]')),
+    tag: document.querySelector(".feedback.wrong .explain-box small")?.textContent.trim(),
+    reason: document.querySelector(".feedback.wrong .explain-box div")?.textContent.trim()
+  }))()`);
+  await evaluate(`document.querySelector('[data-action="challenge-retry"]').click()`);
+  await evaluate(`(() => {
+    const answer = view.challenge.questions[0].answer;
+    for (const index of answer) {
+      document.querySelectorAll(".challenge-question + .option-list .option-btn")[index].click();
+    }
+    document.querySelector('[data-action="challenge-submit"]').click();
+  })()`);
+  results.multiCorrect = await evaluate(`(() => ({
+    correct: Boolean(document.querySelector(".challenge-question ~ .feedback.correct")),
+    next: document.querySelector('[data-action="challenge-next"]')?.textContent.trim(),
+    dualExplanation: document.querySelectorAll(".challenge-dual .explain-box").length
+  }))()`);
+  await evaluate(`document.querySelector(".modal-close").click()`);
+
+  await evaluate(`startConceptChallenge("pc-p01-c03")`);
+  await evaluate(`document.querySelector('[data-action="challenge-start"]').click()`);
+  await evaluate(`(() => {
+    const answer = view.challenge.questions[0].answer;
+    document.querySelectorAll(".challenge-question + .option-list .option-btn")[answer[0]].click();
+    document.querySelector('[data-action="challenge-submit"]').click();
+  })()`);
+  results.judgeQuestion = await evaluate(`(() => ({
+    type: view.challenge.questions[0].type,
+    options: document.querySelectorAll(".challenge-question + .option-list .option-btn").length,
+    correct: Boolean(document.querySelector(".challenge-question ~ .feedback.correct")),
+    dualExplanation: document.querySelectorAll(".challenge-dual .explain-box").length
+  }))()`);
   await evaluate(`document.querySelector(".modal-close").click()`);
 
   await evaluate(`(() => {
@@ -590,6 +687,65 @@ try {
     mapText: document.querySelector(".chapter-map")?.textContent.replace(/\\s+/g, " ").trim() || ""
   }))()`);
   await screenshot("work/edge-income-map.png");
+
+  await evaluate(`(() => {
+    view.modal = { type: "concept", conceptId: "pc-p12-t02" };
+    render();
+  })()`);
+  results.feedback3Timing = await evaluate(`(() => {
+    const text = document.querySelector(".modal")?.textContent.replace(/\\s+/g, " ") || "";
+    const headings = [...document.querySelectorAll(".modal .detail-section h3")].map((node) => node.textContent.trim());
+    return {
+      title: document.querySelector(".modal-head h2")?.textContent,
+      headings,
+      hasHuman: text.includes("先问三句"),
+      hasWhenToUse: Boolean(document.querySelector(".modal .teaching-entry .entry-when")),
+      whenText: document.querySelector(".modal .teaching-entry .entry-when")?.textContent.trim() || "",
+      hasSegmentedEntry: Boolean(document.querySelector('.modal .teaching-entry[data-entry-scope="card"]')),
+      hasTimingRevenueEntry: text.includes("时段法：边履约边确认收入"),
+      memoryText: [...document.querySelectorAll(".modal .detail-section")]
+        .find((node) => node.textContent.includes("最后记一句"))?.textContent.replace(/\\s+/g, " ").trim() || "",
+      chapterEntryFolded: (() => {
+        const details = document.querySelector(".modal details.chapter-entry-guide");
+        return Boolean(details && !details.open);
+      })(),
+      horizontalOverflow: document.querySelector(".modal")?.scrollWidth > document.querySelector(".modal")?.clientWidth + 1
+    };
+  })()`);
+  await screenshot("work/edge-feedback3-timing.png");
+  await evaluate(`document.querySelector(".modal-close").click()`);
+
+  await evaluate(`(() => {
+    view.modal = { type: "concept", conceptId: "pc-p12-t03" };
+    render();
+  })()`);
+  results.feedback3Returns = await evaluate(`(() => {
+    const text = document.querySelector(".modal")?.textContent.replace(/\\s+/g, " ") || "";
+    return {
+      title: document.querySelector(".modal-head h2")?.textContent,
+      hasWhenToUse: Boolean(document.querySelector(".modal .teaching-entry .entry-when")),
+      hasRefundLiability: text.includes("预计负债—应付退货款"),
+      hasReturnCostAsset: text.includes("应收退货成本"),
+      hasSalesStage: text.includes("销售时：先估计退货，收入别记满"),
+      hasCostStage: text.includes("结转成本：退回部分先转应收退货成本"),
+      chapterEntryFolded: (() => {
+        const details = document.querySelector(".modal details.chapter-entry-guide");
+        return Boolean(details && !details.open);
+      })(),
+      horizontalOverflow: document.querySelector(".modal")?.scrollWidth > document.querySelector(".modal")?.clientWidth + 1
+    };
+  })()`);
+  await metrics(390, 844);
+  results.feedback3Mobile = await evaluate(`(() => ({
+    innerWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+    modalScrollWidth: document.querySelector(".modal")?.scrollWidth,
+    modalWidth: document.querySelector(".modal")?.clientWidth,
+    modalOverflow: document.querySelector(".modal")?.scrollWidth > document.querySelector(".modal")?.clientWidth + 1
+  }))()`);
+  await screenshot("work/edge-feedback3-returns-mobile.png");
+  await metrics(1440, 1100);
+  await evaluate(`document.querySelector(".modal-close").click()`);
 
   await evaluate(`(() => {
     const reset = document.querySelector('[data-action="reset-concept-filters"]');
@@ -742,9 +898,66 @@ try {
     title: document.querySelector(".modal-head h2")?.textContent,
     chapter: document.querySelector(".chapter-pass h3")?.textContent,
     recapCards: document.querySelectorAll(".recap-card").length,
+    hasWangSummary: Boolean(document.querySelector(".chapter-summary")),
+    summaryTitle: document.querySelector(".chapter-summary h3")?.textContent,
+    summaryItems: document.querySelectorAll(".chapter-summary-list li").length,
+    summaryMainline: document.querySelector(".chapter-summary-head p")?.textContent.trim() || "",
+    summaryEntry: document.querySelector(".chapter-summary-entry")?.textContent.trim() || "",
+    hasBossButton: Boolean(document.querySelector('[data-action="open-chapter-boss"]')),
     nextChapter: document.querySelector('[data-action="open-next-chapter"]')?.textContent.trim()
   }))()`);
   await screenshot("work/edge-chapter-outro.png");
+  await evaluate(`document.querySelector('[data-action="open-chapter-boss"]').click()`);
+  results.chapterBossStart = await evaluate(`(() => ({
+    title: document.querySelector(".modal-head h2")?.textContent,
+    intro: document.querySelector(".boss-brief")?.textContent.replace(/\\s+/g, " ").trim() || "",
+    stepTitle: document.querySelector(".boss-sheet h3")?.textContent,
+    stepCount: view.chapterBoss?.steps.length,
+    optionCount: document.querySelectorAll(".boss-option-list .option-btn").length,
+    submitDisabled: document.querySelector('[data-action="boss-submit"]')?.disabled
+  }))()`);
+  await evaluate(`(() => {
+    const boss = view.chapterBoss;
+    const wrongIndex = (boss.steps[boss.step].correctIndex + 1) % 4;
+    document.querySelectorAll(".boss-option-list .option-btn")[wrongIndex].click();
+    document.querySelector('[data-action="boss-submit"]').click();
+  })()`);
+  results.chapterBossWrong = await evaluate(`(() => ({
+    wrong: Boolean(document.querySelector(".boss-result.wrong")),
+    retry: Boolean(document.querySelector('[data-action="boss-retry"]')),
+    message: document.querySelector(".boss-result.wrong")?.textContent.replace(/\\s+/g, " ").trim() || ""
+  }))()`);
+  await evaluate(`document.querySelector('[data-action="boss-retry"]').click()`);
+  await evaluate(`(() => {
+    while (view.chapterBoss && !view.chapterBoss.done) {
+      const boss = view.chapterBoss;
+      const step = boss.steps[boss.step];
+      document.querySelectorAll(".boss-option-list .option-btn")[step.correctIndex].click();
+      document.querySelector('[data-action="boss-submit"]').click();
+      if (!view.chapterBoss.done) document.querySelector('[data-action="boss-next"]').click();
+    }
+  })()`);
+  results.chapterBossComplete = await evaluate(`(() => ({
+    done: Boolean(view.chapterBoss?.done),
+    title: document.querySelector(".chapter-pass h3")?.textContent,
+    seal: document.querySelector(".boss-complete-seal")?.textContent.replace(/\\s+/g, ""),
+    summaryCards: document.querySelectorAll(".boss-summary-card").length,
+    summaryText: document.querySelector(".boss-summary-grid")?.textContent.replace(/\\s+/g, " ").trim() || "",
+    replay: Boolean(document.querySelector('[data-action="open-chapter-boss"]'))
+  }))()`);
+  await metrics(390, 844);
+  results.chapterBossMobile = await evaluate(`(() => ({
+    innerWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+    modalWidth: document.querySelector(".modal")?.clientWidth,
+    modalScrollWidth: document.querySelector(".modal")?.scrollWidth,
+    actionsVisible: [...document.querySelectorAll(".modal .feedback-actions .btn")].every((button) => {
+      const rect = button.getBoundingClientRect();
+      return rect.left >= 0 && rect.right <= innerWidth + 1;
+    })
+  }))()`);
+  await screenshot("work/edge-chapter-boss-mobile.png");
+  await metrics(1440, 1100);
   await evaluate(`document.querySelector(".modal-close").click()`);
 
   await evaluate(`document.querySelector('[data-action="nav-map"]').click()`);
@@ -777,6 +990,8 @@ try {
     vouchers: document.querySelectorAll(".voucher-option").length,
     lines: document.querySelectorAll(".voucher-option .journal-line").length,
     teachHasEntryHint: Boolean(document.querySelector(".level-teach .teach-human")?.textContent.includes("折旧分录")),
+    levelEntryOpen: Boolean(document.querySelector(".level-entry")?.open),
+    entryWhen: document.querySelector(".level-entry .entry-when")?.textContent.trim() || "",
     translate: document.querySelector(".translate-box")?.textContent.trim()
   }))()`);
   await evaluate(`document.querySelector(".voucher-option").click()`);
@@ -884,7 +1099,16 @@ try {
   ) failures.push("Bilingual concept text overflows on mobile");
   if (results.localizationAudit.badCount || results.localizationAudit.formulaTermMissCount) failures.push("English terms remain outside Chinese-first parentheses");
   if (results.challengeAudit.badCount > 0) failures.push(`Concept challenge generation defects: ${results.challengeAudit.bad.join(", ")}`);
+  if (results.challengeStepsAudit.badCount > 0) failures.push(`Concept knowledge walkthrough is incomplete: ${results.challengeStepsAudit.bad.join(", ")}`);
   if (results.challengeSource.title !== "票据无因性" || !results.challengeSource.hasButton) failures.push("Concept challenge entry is missing");
+  if (
+    results.challengeKnowledge.title !== "票据无因性"
+    || !results.challengeKnowledge.hasHuman
+    || !results.challengeKnowledge.hasDemo
+    || results.challengeKnowledge.hasSteps < 2
+    || !results.challengeKnowledge.hasStart
+    || results.challengeKnowledge.hasOptions
+  ) failures.push("Concept challenge knowledge-first stage is incomplete");
   if (results.challengeStart.title !== "票据无因性" || !results.challengeStart.keywordCheat?.includes("关键词") || !results.challengeStart.goal) failures.push("Concept challenge instructions or keyword cheat are missing");
   if (results.challengeStart.options !== 4 || !results.challengeStart.submitDisabled) failures.push("Concept challenge option state is incorrect");
   if (!results.challengeWrong.wrong || !results.challengeWrong.retry || !results.challengeWrong.hint) failures.push("Concept challenge wrong-answer flow is incomplete");
@@ -892,12 +1116,42 @@ try {
   if (results.challengeWrong.feedbackTop >= results.challengeWrong.viewport || results.challengeWrong.feedbackBottom <= 0) failures.push("Wrong-answer explanation was not scrolled into view");
   if (!results.challengeComplete.done || results.challengeComplete.title !== "票据无因性" || !results.challengeComplete.cleared) failures.push("Concept challenge completion was not saved");
   if (!results.challengeComplete.hasExample || !results.challengeComplete.nextButton) failures.push("Concept challenge completion review is incomplete");
-  if (!results.challengeComplete.message?.includes("三关都过了")) failures.push("Concept challenge completion says the wrong number of steps");
+  if (!results.challengeComplete.hasRecap || !results.challengeComplete.routeDone) failures.push("Concept challenge completion recap is incomplete");
   if (results.mobileChallenge.scrollWidth > results.mobileChallenge.innerWidth + 1 || results.mobileChallenge.cheatColumns.split(" ").length !== 1) failures.push("Mobile concept challenge layout is broken");
   if (results.mobileChallengeComplete.actions.length !== 3 || results.mobileChallengeComplete.actions.some((button) => !button.visible)) failures.push("Mobile concept completion actions are not fully reachable");
+  if (results.multiToggle.type !== "multi" || results.multiToggle.selected.join(",") !== "1" || results.multiToggle.submitDisabled) failures.push("Multi-select toggle state is incorrect");
+  if (!results.multiMissing.wrong || !results.multiMissing.retry || !results.multiMissing.tag?.includes("少选") || !results.multiMissing.reason?.includes("漏")) failures.push("Multi-select missing-answer feedback is incomplete");
+  if (!results.multiCorrect.correct || !results.multiCorrect.next || results.multiCorrect.dualExplanation !== 2) failures.push("Multi-select correct-answer flow is incomplete");
+  if (results.judgeQuestion.type !== "judge" || results.judgeQuestion.options !== 2 || !results.judgeQuestion.correct || results.judgeQuestion.dualExplanation !== 2) failures.push("Judge question flow is incomplete");
   if (results.chapterFilter.groups < 1 || !results.chapterFilter.heading?.includes("存货")) failures.push("Chapter filter failed");
   if (!results.chapterFilter.hasMap || !results.chapterFilter.hasMapEntry || results.chapterFilter.cards !== results.chapterFilter.expectedCards) failures.push("Chapter knowledge map is missing the full concept set or chapter entry");
   if (!results.chapterFilter.mapText.includes(`${results.chapterFilter.expectedCards} 个考点`)) failures.push("Chapter map does not state the full chapter concept count");
+  if (
+    results.feedback3Timing.title !== "时段法与时点法"
+    || !results.feedback3Timing.headings.includes("本题专属分录")
+    || !results.feedback3Timing.hasHuman
+    || !results.feedback3Timing.hasWhenToUse
+    || !results.feedback3Timing.whenText.includes("什么时候用")
+    || !results.feedback3Timing.hasSegmentedEntry
+    || !results.feedback3Timing.hasTimingRevenueEntry
+    || !results.feedback3Timing.memoryText.includes("客户边做边受益")
+    || !results.feedback3Timing.chapterEntryFolded
+  ) failures.push("Feedback 3 timing card is missing the plain-language patch, when-to-use note, or card-specific entry");
+  if (
+    results.feedback3Returns.title !== "可变对价与退货条款"
+    || !results.feedback3Returns.hasWhenToUse
+    || !results.feedback3Returns.hasRefundLiability
+    || !results.feedback3Returns.hasReturnCostAsset
+    || !results.feedback3Returns.hasSalesStage
+    || !results.feedback3Returns.hasCostStage
+    || !results.feedback3Returns.chapterEntryFolded
+  ) failures.push("Feedback 3 return card is missing its card-specific sales/return entries");
+  if (
+    results.feedback3Timing.horizontalOverflow
+    || results.feedback3Returns.horizontalOverflow
+    || results.feedback3Mobile.scrollWidth > results.feedback3Mobile.innerWidth + 1
+    || results.feedback3Mobile.modalOverflow
+  ) failures.push("Feedback 3 concept card overflows on mobile");
   if (results.practiceNewCard.count < 1 || !results.practiceNewCard.titles.some((title) => title.includes("毛利率"))) failures.push("New inventory valuation concept is missing");
   if (!results.researchAccountingSearch.titles.includes("内部研究开发支出的账务处理")) failures.push("Research and development accounting card is not searchable");
   if (!results.foreignCurrencyDateSearch.titles.includes("发生日的会计处理")) failures.push("Foreign currency transaction date card is not searchable");
@@ -935,11 +1189,39 @@ try {
   if (results.mobileLevel.stickyFooter !== "sticky") failures.push("Mobile action footer is not sticky");
   if (!results.persisted.completed.includes("p01-t1")) failures.push("Progress did not persist");
   if (results.chapterOutro.title !== "剧情通关" || results.chapterOutro.recapCards !== 3) failures.push("Chapter outro is incomplete");
+  if (
+    !results.chapterOutro.hasWangSummary
+    || results.chapterOutro.summaryTitle !== "王姐的章节总结"
+    || results.chapterOutro.summaryItems < 2
+    || results.chapterOutro.summaryMainline.length < 30
+    || results.chapterOutro.summaryEntry.length < 30
+    || !results.chapterOutro.hasBossButton
+  ) failures.push("Wang Jie's chapter summary is missing or too thin");
+  if (
+    results.chapterBossStart.title !== "王姐的大单子 · 三步会签"
+    || results.chapterBossStart.stepCount !== 3
+    || results.chapterBossStart.optionCount !== 4
+    || !results.chapterBossStart.submitDisabled
+    || !results.chapterBossStart.intro.includes("全权负责")
+  ) failures.push("Wang Jie's chapter boss did not start correctly");
+  if (!results.chapterBossWrong.wrong || !results.chapterBossWrong.retry || results.chapterBossWrong.message.length < 20) failures.push("Chapter boss wrong-answer retry flow is incomplete");
+  if (
+    !results.chapterBossComplete.done
+    || results.chapterBossComplete.title !== "王姐的大单子结案"
+    || results.chapterBossComplete.seal !== "结案"
+    || results.chapterBossComplete.summaryCards !== 3
+    || !results.chapterBossComplete.replay
+  ) failures.push("Chapter boss completion review is incomplete");
+  if (
+    results.chapterBossMobile.scrollWidth > results.chapterBossMobile.innerWidth + 1
+    || results.chapterBossMobile.modalScrollWidth > results.chapterBossMobile.modalWidth + 1
+    || !results.chapterBossMobile.actionsVisible
+  ) failures.push("Chapter boss overflows or hides actions on mobile");
   if (results.lawMap.tabs !== 3 || results.lawMap.chapters !== 7) failures.push("Law subject map is incomplete");
   if (results.lawMap.tabRight > results.lawMap.viewport + 1) failures.push("Subject tabs overflow on mobile");
   if (!results.lawLevel.title || !results.lawLevel.translate || !results.lawLevel.hasTeach) failures.push("Law level did not render the human teaching block");
   if (results.journal.title !== "折旧分录：费用去哪边" || results.journal.vouchers < 3) failures.push("Journal level did not render");
-  if (!results.journal.translate || results.journal.lines < 2 || !results.journal.correct || !results.journal.teachHasEntryHint) failures.push("Journal answer flow failed");
+  if (!results.journal.translate || results.journal.lines < 2 || !results.journal.correct || !results.journal.teachHasEntryHint || !results.journal.levelEntryOpen || !results.journal.entryWhen.includes("什么时候用")) failures.push("Journal answer flow or auto-visible entry card failed");
   if (!results.journal.correctEntryVisible.human || !results.journal.correctEntryVisible.entry || !results.journal.correctEntryVisible.entryReason) failures.push("Journal feedback is missing human review, entry lines, or entry reasoning");
   if (results.syncDesktop.horizontalOverflow || results.syncDesktop.modalOverflow || results.syncDesktop.modalWidth > results.syncDesktop.viewport) failures.push("Sync modal overflows on desktop");
   if (results.syncInitial.title !== "记录同步" || !results.syncInitial.hasSummary || !results.syncInitial.hasGenerate || !results.syncInitial.hasImport) failures.push("Sync modal is incomplete");
